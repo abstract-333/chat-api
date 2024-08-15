@@ -1,13 +1,14 @@
 from abc import ABC
 from dataclasses import dataclass, field
 from datetime import datetime
-from uuid import uuid4
+
+from utils.uuid import get_uuid4
 
 
 @dataclass
 class BaseEntity(ABC):
     oid: str = field(
-        default_factory=lambda: str(object=uuid4()),
+        default_factory=get_uuid4,
         kw_only=True,
     )
     created_at: datetime = field(
