@@ -16,3 +16,6 @@ class Chat(BaseEntity):
         default_factory=set,
         kw_only=True,
     )
+
+    def add_message(self, message: Message) -> None:
+        self.messages.add(message)
