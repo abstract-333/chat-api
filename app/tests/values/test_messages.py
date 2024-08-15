@@ -46,3 +46,26 @@ def test_create_chat(
             Chat(title=Title(value=chat_title)).created_at.date()
             == datetime.today().date()
         )
+
+
+@pytest.mark.parametrize(
+    argnames="message, title ,expectation",
+    argvalues=[
+        (
+            Message(Text("Hello World Chat")),
+            Title("Hello World Title"),
+            does_not_raise(),
+        ),
+    ],
+)
+def test_add_message_to_chat(
+    message: Message,
+    title: Title,
+    expectation: Any,
+):
+    with expectation:
+        chat = Chat(title=title)
+        chat.add_message(message=message)
+        assert message in chat.messages
+        chat.add_message(message=message)
+        assert message in chat.messages
