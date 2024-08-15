@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ddd-fastapi"
+version = "0.1.0"
+description = ""
+authors = ["bashar <basharhasan74@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.112.0"}
+motor = "^3.5.1"
+uvicorn = {extras = ["all"], version = "^0.30.6"}
+pytest = "^8.3.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
