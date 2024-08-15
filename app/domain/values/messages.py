@@ -4,8 +4,6 @@ from typing import Any, TypeVar
 from domain.exceptions.messages import EmptyTextError, TextTooLongException
 from domain.values.base import BaseValueObject
 
-VT = TypeVar(name="VT", bound=Any)
-
 
 @dataclass(frozen=True)
 class Text(BaseValueObject):
@@ -21,8 +19,6 @@ class Text(BaseValueObject):
 
 @dataclass(frozen=True)
 class Title(BaseValueObject):
-    value: str
-
     def validate(self) -> None:
         if not self.value:
             raise EmptyTextError()
