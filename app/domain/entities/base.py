@@ -4,7 +4,7 @@ from datetime import datetime
 from uuid import uuid4
 
 
-@dataclass(eq=False)
+@dataclass
 class BaseEntity(ABC):
     oid: str = field(
         default_factory=lambda: str(object=uuid4()),

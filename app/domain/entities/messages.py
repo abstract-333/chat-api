@@ -4,12 +4,12 @@ from domain.entities.base import BaseEntity
 from domain.values.messages import Text, Title
 
 
-@dataclass
+@dataclass(eq=False)
 class Message(BaseEntity):
     text: Text
 
 
-@dataclass
+@dataclass(eq=False)
 class Chat(BaseEntity):
     title: Title
     messages: set[Message] = field(
