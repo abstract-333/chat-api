@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 from domain.entities.base import BaseEntity
 from domain.values.messages import Text, Title
+from events.messages import NewMessageReceivedEvent
 
 
 @dataclass(eq=False)
@@ -19,3 +20,10 @@ class Chat(BaseEntity):
 
     def add_message(self, message: Message) -> None:
         self.messages.add(message)
+        self.register_event(
+            NewMessageReceivedEvent(
+                message_text=message.text.as_generic_type(),
+                message_oid=message.oid,
+                chat_oid=self.oid,
+            )
+        )
