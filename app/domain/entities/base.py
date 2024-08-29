@@ -4,7 +4,6 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 from events.base import BaseEvent
-from events.messages import NewMessageReceivedEvent
 from utils.uuid import get_uuid4
 
 
