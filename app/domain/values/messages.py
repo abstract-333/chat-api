@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Any, TypeVar
 
 from domain.exceptions.messages import EmptyTextError, TextTooLongException
 from domain.values.base import BaseValueObject
