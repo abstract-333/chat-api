@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
+from typing import Self
 
 from domain.entities.base import BaseEntity
 from domain.values.messages import Text, Title
-from events.messages import NewMessageReceivedEvent
+from events.messages import NewChatCreatedEvent, NewMessageReceivedEvent
 
 
 @dataclass(eq=False)
@@ -18,10 +19,21 @@ class Chat(BaseEntity):
         kw_only=True,
     )
 
+    @classmethod
+    def create_chat(cls, title: Title) -> "Chat":
+        new_chat: Self = cls(title=title)
+        new_chat.register_event(
+            event=NewChatCreatedEvent(
+                chat_oid=new_chat.oid,
+                chat_title=title.as_generic_type(),
+            )
+        )
+        return new_chat
+
     def add_message(self, message: Message) -> None:
         self.messages.add(message)
         self.register_event(
-            NewMessageReceivedEvent(
+            event=NewMessageReceivedEvent(
                 message_text=message.text.as_generic_type(),
                 message_oid=message.oid,
                 chat_oid=self.oid,
