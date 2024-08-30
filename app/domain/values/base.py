@@ -11,7 +11,7 @@ VT = TypeVar("VT", bound=Any)
 class BaseValueObject(ABC, Generic[VT]):
     value: VT
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.validate()
 
     @abstractmethod
