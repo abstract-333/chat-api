@@ -22,7 +22,9 @@ class Mediator:
         kw_only=True,
     )
 
-    def register_event(self, event: ET, event_handlers: Iterable[EventHandler[ET, ER]]):
+    def register_event(
+        self, event: ET, event_handlers: Iterable[EventHandler[ET, ER]]
+    ) -> None:
         self.events_map[event].append(event_handlers)
 
     def register_command(
@@ -35,7 +37,7 @@ class Mediator:
         handlers = self.events_map.get(event_type)
 
         if not handlers:
-            raise CommandHandlersNotRegisteredException(event_type)
+            raise CommandHandlersNotRegisteredException(command_type=event_type)
 
         result = []
 
@@ -49,6 +51,6 @@ class Mediator:
         handlers = self.events_map.get(command_type)
 
         if not handlers:
-            raise CommandHandlersNotRegisteredException(command_type)
+            raise CommandHandlersNotRegisteredException(command_type=command_type)
 
         return [await handler.handle(command) for handler in handlers]
