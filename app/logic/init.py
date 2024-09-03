@@ -20,7 +20,7 @@ def _init_container() -> Container:
         factory=MemoryChatRepository,
         scope=Scope.singleton,
     )
-    container.register(CreateChatCommandHandler)
+    container.register(service=CreateChatCommandHandler)
 
     def init_mediator() -> Mediator:
         mediator = Mediator()
