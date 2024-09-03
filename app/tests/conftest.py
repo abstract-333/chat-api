@@ -13,10 +13,10 @@ def container() -> Container:
 
 
 @fixture()
-def mediator(container: Container):
+def mediator(container: Container) -> Mediator:
     return container.resolve(service_key=Mediator)
 
 
 @fixture()
-def chat_repository(container: Container):
+def chat_repository(container: Container) -> BaseChatRepository:
     return container.resolve(service_key=BaseChatRepository)
