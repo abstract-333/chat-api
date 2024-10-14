@@ -5,7 +5,6 @@ import pytest
 from domain.entities.messages import Chat, Message
 from domain.exceptions.messages import EmptyTextError, TextTooLongException
 from domain.values.messages import Text, Title
-from events.base import BaseEvent
 from events.messages import NewMessageReceivedEvent
 
 

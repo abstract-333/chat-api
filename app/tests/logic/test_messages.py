@@ -16,7 +16,9 @@ async def test_create_chat_command_success(
     faker: Faker,
 ) -> None:
     chat: Chat
-    chat, *_ = await mediator.handle_command(CreateChatCommand(title=faker.text()))
+    chat, *_ = await mediator.handle_command(
+        command=CreateChatCommand(title=faker.text())
+    )
 
     assert await chat_repository.check_chat_exists_by_title(
         title=chat.title.as_generic_type()
@@ -29,9 +31,9 @@ async def test_create_chat_command_title_already_exists(
     mediator: Mediator,
     faker: Faker,
 ) -> None:
-    title_text = faker.text()
-    chat = Chat(title=Title(title_text))
-    await chat_repository.add_chat(chat)
+    title_text: str = faker.text()
+    chat = Chat(title=Title(value=title_text))
+    await chat_repository.add_chat(chat=chat)
 
     assert chat in chat_repository._saved_chats
 
