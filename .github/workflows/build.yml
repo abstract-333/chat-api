@@ -1,4 +1,4 @@
-name: Makefile CI
+name: Format & Test
 on:
   push:
     branches: [ "main" ]
@@ -18,9 +18,12 @@ jobs:
           echo MONGO_DB_ADMIN_USERNAME=${{ secrets.MONGO_DB_ADMIN_USERNAME }} >> .env
           echo MONGO_DB_ADMIN_PASSWORD=${{ secrets.MONGO_DB_ADMIN_PASSWORD }} >> .env
           cat .env
-      
+
     - name: Make Docker Image
       run: make app
+
+    - name: Format
+      run: make format 
 
     - name: Test app
       run: make test
