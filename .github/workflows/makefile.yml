@@ -22,5 +22,8 @@ jobs:
     - name: Make Docker Image
       run: make app
 
-    - name: Test App
+    - name: Test app
       run: make test
+
+    - name: Stop the app
+      run: make app-down
