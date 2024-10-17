@@ -1,11 +1,9 @@
-from application.api.messages.handlers import router as message_router
 from fastapi import FastAPI
-from fastapi.openapi.docs import (
-    get_redoc_html,
-    get_swagger_ui_html,
-    get_swagger_ui_oauth2_redirect_html,
-)
+from fastapi.openapi.docs import (get_redoc_html, get_swagger_ui_html,
+                                  get_swagger_ui_oauth2_redirect_html)
 from fastapi.responses import HTMLResponse
+
+from application.api.messages.handlers import router as message_router
 
 
 def create_app() -> FastAPI:

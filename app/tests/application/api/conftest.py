@@ -1,7 +1,8 @@
 import pytest
-from application.api.main import create_app
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+
+from application.api.main import create_app
 from logic.init import init_container
 from tests.fixtures import init_dummy_container
 
