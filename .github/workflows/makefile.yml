@@ -1,0 +1,26 @@
+name: Makefile CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  make:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Create env file
+      run: |
+          touch .env
+          echo API_PORT=${{ secrets.API_PORT }} >> .env
+          echo PYTHONPATH=${{ secrets.PYTHONPATH }} >> .env
+          echo MONGO_DB_CONNECTION_URI=${{ secrets.MONGO_DB_CONNECTION_URI }} >> .env
+          echo MONGO_DB_ADMIN_USERNAME=${{ secrets.MONGO_DB_ADMIN_USERNAME }} >> .env
+          echo MONGO_DB_ADMIN_PASSWORD=${{ secrets.MONGO_DB_ADMIN_PASSWORD }} >> .env
+          cat .env
+      
+    - name: Make Docker Image
+      run: make app
+
+    - name: Test App
+      run: make test
