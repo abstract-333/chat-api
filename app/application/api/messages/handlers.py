@@ -1,5 +1,4 @@
-from application.api.messages.schemas import (CreateChatInSchema,
-                                              CreateChatOutSchema)
+from application.api.messages.schemas import CreateChatInSchema, CreateChatOutSchema
 from application.api.schemas import ErrorSchema
 from domain.exceptions.base import ApplicationException
 from fastapi import Depends, HTTPException, status

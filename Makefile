@@ -23,9 +23,9 @@ app-shell:
 
 .PHONY: format
 format:
-	black app/
-	isort app/
-	pylint app/
+	${EXEC} ${APP_CONTAINER} black app/
+	${EXEC} ${APP_CONTAINER} isort app/
+	${EXEC} ${APP_CONTAINER} pylint app/
 	
 .PHONY: test
 test:
