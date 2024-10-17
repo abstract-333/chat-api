@@ -1,12 +1,11 @@
+import pytest
 from domain.entities.messages import Chat
 from domain.values.messages import Title
+from faker import Faker
 from infra.repositories.base import BaseChatRepository
 from logic.commands.messages import CreateChatCommand
 from logic.exceptions.messages import ChatWithThatTitleAlreadyExistsException
 from logic.mediator import Mediator
-
-import pytest
-from faker import Faker
 
 
 @pytest.mark.asyncio

@@ -1,6 +1,5 @@
-from pydantic import BaseModel
-
 from domain.entities.messages import Chat
+from pydantic import BaseModel
 
 
 class CreateChatInSchema(BaseModel):

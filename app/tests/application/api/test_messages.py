@@ -1,8 +1,8 @@
+import pytest
 from faker import Faker
 from fastapi import FastAPI, status
 from fastapi.testclient import TestClient
 from httpx import Response
-import pytest
 
 
 @pytest.mark.asyncio

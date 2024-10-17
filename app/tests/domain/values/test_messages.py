@@ -1,6 +1,7 @@
-from datetime import datetime
 from contextlib import nullcontext as does_not_raise
+from datetime import datetime
 from typing import Any
+
 import pytest
 from domain.entities.messages import Chat, Message
 from domain.exceptions.messages import EmptyTextError, TextTooLongException

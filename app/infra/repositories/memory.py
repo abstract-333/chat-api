@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+
 from domain.entities.messages import Chat
 from infra.repositories.base import BaseChatRepository
 

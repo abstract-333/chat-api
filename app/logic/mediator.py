@@ -2,13 +2,10 @@ from collections import defaultdict
 from collections.abc import Iterable
 from dataclasses import dataclass, field
 
-from logic.commands.base import CR, CT, BaseCommand, CommandHandler
-from logic.events.base import EventHandler, ER, ET
-from logic.exceptions.mediator import (
-    CommandHandlersNotRegisteredException,
-)
-
 from events.base import BaseEvent
+from logic.commands.base import CR, CT, BaseCommand, CommandHandler
+from logic.events.base import ER, ET, EventHandler
+from logic.exceptions.mediator import CommandHandlersNotRegisteredException
 
 
 @dataclass(eq=False)
