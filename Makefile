@@ -25,7 +25,6 @@ app-shell:
 format:
 	${EXEC} ${APP_CONTAINER} black .
 	${EXEC} ${APP_CONTAINER} isort .
-	${EXEC} ${APP_CONTAINER} pylint .
 	
 .PHONY: test
 test:
