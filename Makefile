@@ -20,6 +20,12 @@ app-logs:
 .PHONY: app-shell
 app-shell:
 	${EXEC} ${APP_CONTAINER} bash
+
+.PHONY: format
+format:
+	black app/
+	isort app/
+	pylint app/
 	
 .PHONY: test
 test:
