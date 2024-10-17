@@ -9,16 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install Make
-      run: make
-      
-    - name: 'Create env file'
+    - name: Create env file
       run: |
           touch .env
           echo API_ENDPOINT="https://xxx.execute-api.us-west-2.amazonaws.com" >> .env
           echo API_KEY=${{ secrets.API_KEY }} >> .env
           cat .env
-          
+      
     - name: Make Docker Image
       run: make app
 
