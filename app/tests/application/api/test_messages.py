@@ -40,7 +40,6 @@ async def test_create_chat_fail_text_too_long(
 async def test_create_chat_fail_text_empty(
     app: FastAPI,
     client: TestClient,
-    faker: Faker,
 ) -> None:
     url = app.url_path_for("create_chat_handler")
 
