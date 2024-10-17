@@ -12,8 +12,11 @@ jobs:
     - name: Create env file
       run: |
           touch .env
-          echo API_ENDPOINT="https://xxx.execute-api.us-west-2.amazonaws.com" >> .env
-          echo API_KEY=${{ secrets.API_KEY }} >> .env
+          echo API_PORT=${{ secrets.API_PORT }} >> .env
+          echo PYTHONPATH=${{ secrets.PYTHONPATH }} >> .env
+          echo MONGO_DB_CONNECTION_URI=${{ secrets.MONGO_DB_CONNECTION_URI }} >> .env
+          echo MONGO_DB_ADMIN_USERNAME=${{ secrets.MONGO_DB_ADMIN_USERNAME }} >> .env
+          echo MONGO_DB_ADMIN_PASSWORD=${{ secrets.MONGO_DB_ADMIN_PASSWORD }} >> .env
           cat .env
       
     - name: Make Docker Image
