@@ -1,4 +1,4 @@
-name: Format & Test
+name: Test
 on:
   push:
     branches: [ "main" ]
@@ -19,14 +19,9 @@ jobs:
           echo MONGO_DB_ADMIN_PASSWORD=${{ secrets.MONGO_DB_ADMIN_PASSWORD }} >> .env
           cat .env
 
-    - name: Make Docker Image
-      run: make app
+    - name: Install Libraries
+      run: pip install -r --no-cache-dir requirements.txt
 
-    - name: Format
-      run: make format 
+    - name: Test
+      run: pytest 
 
-    - name: Test app
-      run: make test
-
-    - name: Stop the app
-      run: make app-down
