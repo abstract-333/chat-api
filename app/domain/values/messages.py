@@ -5,7 +5,7 @@ from domain.values.base import BaseValueObject
 
 
 @dataclass(frozen=True)
-class Text(BaseValueObject):
+class Text(BaseValueObject[str]):
     value: str
 
     def validate(self) -> None:
@@ -17,7 +17,7 @@ class Text(BaseValueObject):
 
 
 @dataclass(frozen=True)
-class Title(BaseValueObject):
+class Title(BaseValueObject[str]):
     def validate(self) -> None:
         if not self.value:
             raise EmptyTextError()
