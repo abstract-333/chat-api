@@ -20,7 +20,7 @@ class Chat(BaseEntity):
     )
 
     @classmethod
-    def create_chat(cls, title: Title) -> "Chat":
+    def create_chat(cls, title: Title) -> Self:
         new_chat: Self = cls(title=title)
         new_chat.register_event(
             event=NewChatCreatedEvent(
