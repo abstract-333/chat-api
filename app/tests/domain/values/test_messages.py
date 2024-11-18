@@ -19,14 +19,14 @@ from events.messages import NewMessageReceivedEvent
     ],
 )
 def test_create_message(
-    text: str,
-    expectation: Any,
+        text: str,
+        expectation: Any,
 ):
     with expectation:
         assert Message(text=Text(value=text)).text.as_generic_type() == text
         assert Message(text=Text(value=text)).text == Text(text)
         assert (
-            Message(text=Text(value=text)).created_at.date() == datetime.today().date()
+                Message(text=Text(value=text)).created_at.date() == datetime.today().date()
         )
 
 
@@ -39,15 +39,15 @@ def test_create_message(
     ],
 )
 def test_create_chat(
-    chat_title: str,
-    expectation: Any,
+        chat_title: str,
+        expectation: Any,
 ):
     with expectation:
         assert Chat(title=Title(value=chat_title)).title.as_generic_type() == chat_title
         assert Chat(title=Title(value=chat_title)).created_at.date()
         assert (
-            Chat(title=Title(value=chat_title)).created_at.date()
-            == datetime.today().date()
+                Chat(title=Title(value=chat_title)).created_at.date()
+                == datetime.today().date()
         )
 
 
@@ -55,16 +55,16 @@ def test_create_chat(
     argnames="message, title ,expectation",
     argvalues=[
         (
-            Message(Text("Hello World Chat")),
-            Title("Hello World Title"),
-            does_not_raise(),
+                Message(Text("Hello World Chat")),
+                Title("Hello World Title"),
+                does_not_raise(),
         ),
     ],
 )
 def test_add_message_to_chat(
-    message: Message,
-    title: Title,
-    expectation: Any,
+        message: Message,
+        title: Title,
+        expectation: Any,
 ):
     with expectation:
         chat = Chat(title=title)
@@ -78,16 +78,16 @@ def test_add_message_to_chat(
     argnames="message, title ,expectation",
     argvalues=[
         (
-            Message(Text("Hello World Chat")),
-            Title("Hello World Title"),
-            does_not_raise(),
+                Message(Text("Hello World Chat")),
+                Title("Hello World Title"),
+                does_not_raise(),
         ),
     ],
 )
 def test_new_message_events(
-    message: Message,
-    title: Title,
-    expectation: Any,
+        message: Message,
+        title: Title,
+        expectation: Any,
 ):
     with expectation:
         chat = Chat(title=title)
