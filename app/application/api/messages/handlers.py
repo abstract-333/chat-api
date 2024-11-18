@@ -24,9 +24,9 @@ router = APIRouter(
     },
 )
 async def create_chat_handler(
-    schema: CreateChatInSchema,
-    container=Depends(dependency=init_container),
-):
+        schema: CreateChatInSchema,
+        container=Depends(dependency=init_container),
+) -> CreateChatOutSchema:
     """Create New Chat"""
     mediator: Mediator = container.resolve(Mediator)
     try:
