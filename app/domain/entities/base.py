@@ -2,6 +2,7 @@ from abc import ABC
 from copy import copy
 from dataclasses import dataclass, field
 from datetime import datetime
+from typing import Self
 
 from events.base import BaseEvent
 from utils.uuid import get_uuid4
@@ -33,5 +34,5 @@ class BaseEntity(ABC):
     def __hash__(self) -> int:
         return hash(self.oid)
 
-    def __eq__(self, __value: "BaseEntity") -> bool:
+    def __eq__(self, __value: Self) -> bool:
         return self.oid == __value.oid
