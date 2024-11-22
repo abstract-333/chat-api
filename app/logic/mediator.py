@@ -4,7 +4,6 @@ from dataclasses import (
     dataclass,
     field,
 )
-from typing import Generic
 
 from logic.commands.base import (
     CommandHandler,
@@ -23,7 +22,7 @@ from logic.exceptions.mediator import (
 
 
 @dataclass(eq=False)
-class Mediator(Generic[ET, ER, CT, CR]):
+class Mediator:
     events_map: defaultdict[ET, list[EventHandler[ET, ER]]] = field(
         default_factory=lambda: defaultdict(list),
         kw_only=True,
