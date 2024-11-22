@@ -8,7 +8,7 @@ from datetime import datetime
 from typing import Self
 
 from events.base import BaseEvent
-from utils.uuid import get_uuid4
+from utils.uuid_4 import get_uuid4
 
 
 @dataclass
