@@ -5,7 +5,6 @@ from dataclasses import (
     field,
 )
 from datetime import datetime
-from typing import Self
 
 from events.base import BaseEvent
 from utils.uuid_4 import get_uuid4
@@ -37,5 +36,8 @@ class BaseEntity(ABC):
     def __hash__(self) -> int:
         return hash(self.oid)
 
-    def __eq__(self, __value: Self) -> bool:
+    def __eq__(self, __value: object) -> bool:
+        if not isinstance(__value, BaseEntity):
+            raise NotImplementedError
+
         return self.oid == __value.oid
