@@ -4,7 +4,7 @@ from dataclasses import (
     field,
 )
 
-from utils.uuid import get_uuid4
+from utils.uuid_4 import get_uuid4
 
 
 @dataclass
