@@ -1,4 +1,7 @@
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 
 from domain.entities.messages import Chat
 from infra.repositories.base import BaseChatRepository
@@ -15,7 +18,7 @@ class MemoryChatRepository(BaseChatRepository):
                     chat
                     for chat in self._saved_chats
                     if chat.title.as_generic_type() == title
-                )
+                ),
             )
         except StopIteration:
             return False

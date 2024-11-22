@@ -1,10 +1,16 @@
 from functools import lru_cache
 
-from punq import Container, Scope
+from punq import (
+    Container,
+    Scope,
+)
 
 from infra.repositories.base import BaseChatRepository
 from infra.repositories.memory import MemoryChatRepository
-from logic.commands.messages import CreateChatCommand, CreateChatCommandHandler
+from logic.commands.messages import (
+    CreateChatCommand,
+    CreateChatCommandHandler,
+)
 from logic.mediator import Mediator
 
 

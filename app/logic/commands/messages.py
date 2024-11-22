@@ -3,7 +3,10 @@ from dataclasses import dataclass
 from domain.entities.messages import Chat
 from domain.values.messages import Title
 from infra.repositories.base import BaseChatRepository
-from logic.commands.base import BaseCommand, CommandHandler
+from logic.commands.base import (
+    BaseCommand,
+    CommandHandler,
+)
 from logic.exceptions.messages import ChatWithThatTitleAlreadyExistsException
 
 

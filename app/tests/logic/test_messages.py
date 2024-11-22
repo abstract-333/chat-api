@@ -17,11 +17,11 @@ async def test_create_chat_command_success(
 ) -> None:
     chat: Chat
     chat, *_ = await mediator.handle_command(
-        command=CreateChatCommand(title=faker.text())
+        command=CreateChatCommand(title=faker.text()),
     )
 
     assert await chat_repository.check_chat_exists_by_title(
-        title=chat.title.as_generic_type()
+        title=chat.title.as_generic_type(),
     )
 
 

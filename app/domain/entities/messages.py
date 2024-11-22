@@ -1,9 +1,18 @@
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 from typing import Self
 
 from domain.entities.base import BaseEntity
-from domain.values.messages import Text, Title
-from events.messages import NewChatCreatedEvent, NewMessageReceivedEvent
+from domain.values.messages import (
+    Text,
+    Title,
+)
+from events.messages import (
+    NewChatCreatedEvent,
+    NewMessageReceivedEvent,
+)
 
 
 @dataclass(eq=False)
@@ -26,7 +35,7 @@ class Chat(BaseEntity):
             event=NewChatCreatedEvent(
                 chat_oid=new_chat.oid,
                 chat_title=title.as_generic_type(),
-            )
+            ),
         )
         return new_chat
 
@@ -37,5 +46,5 @@ class Chat(BaseEntity):
                 message_text=message.text.as_generic_type(),
                 message_oid=message.oid,
                 chat_oid=self.oid,
-            )
+            ),
         )

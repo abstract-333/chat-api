@@ -1,13 +1,20 @@
-from fastapi import Depends, HTTPException, status
+from fastapi import (
+    Depends,
+    HTTPException,
+    status,
+)
 from fastapi.routing import APIRouter
 
-from application.api.messages.schemas import (CreateChatInSchema,
-                                              CreateChatOutSchema)
+from application.api.messages.schemas import (
+    CreateChatInSchema,
+    CreateChatOutSchema,
+)
 from application.api.schemas import ErrorSchema
 from domain.exceptions.base import ApplicationException
 from logic.commands.messages import CreateChatCommand
 from logic.init import init_container
 from logic.mediator import Mediator
+
 
 router = APIRouter(
     tags=["Chat"],
@@ -31,12 +38,12 @@ async def create_chat_handler(
     mediator: Mediator = container.resolve(Mediator)
     try:
         chat, *_ = await mediator.handle_command(
-            command=CreateChatCommand(title=schema.title)
+            command=CreateChatCommand(title=schema.title),
         )
 
     except ApplicationException as exception:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail={"error": exception.message}
+            status_code=status.HTTP_400_BAD_REQUEST, detail={"error": exception.message},
         )
 
     return CreateChatOutSchema.from_entity(chat=chat)
