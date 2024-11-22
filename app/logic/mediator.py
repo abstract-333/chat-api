@@ -23,6 +23,7 @@ from logic.exceptions.mediator import (
 
 @dataclass(eq=False)
 class Mediator:
+    """Mediator Design Pattern"""
     events_map: defaultdict[ET, list[EventHandler[ET, ER]]] = field(
         default_factory=lambda: defaultdict(list),
         kw_only=True,
