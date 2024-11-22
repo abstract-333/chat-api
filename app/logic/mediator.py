@@ -16,7 +16,10 @@ from logic.events.base import (
     ET,
     EventHandler,
 )
-from logic.exceptions.mediator import CommandHandlersNotRegisteredException
+from logic.exceptions.mediator import (
+    CommandHandlersNotRegisteredException,
+    EventHandlersNotRegisteredException,
+)
 
 
 @dataclass(eq=False)
@@ -45,7 +48,7 @@ class Mediator(Generic[ET, ER, CT, CR]):
         handlers = self.events_map.get(event_type)
 
         if not handlers:
-            raise CommandHandlersNotRegisteredException(command_type=event_type)
+            raise EventHandlersNotRegisteredException(event_type)
 
         result: list[ER] = []
 
