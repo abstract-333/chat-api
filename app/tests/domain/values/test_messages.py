@@ -30,7 +30,7 @@ from events.messages import NewMessageReceivedEvent
 def test_create_message(
         text: str,
         expectation: Any,
-):
+) -> None:
     with expectation:
         assert Message(text=Text(value=text)).text.as_generic_type() == text
         assert Message(text=Text(value=text)).text == Text(text)
@@ -50,7 +50,7 @@ def test_create_message(
 def test_create_chat(
         chat_title: str,
         expectation: Any,
-):
+) -> None:
     with expectation:
         assert Chat(title=Title(value=chat_title)).title.as_generic_type() == chat_title
         assert Chat(title=Title(value=chat_title)).created_at.date()
@@ -74,7 +74,7 @@ def test_add_message_to_chat(
         message: Message,
         title: Title,
         expectation: Any,
-):
+) -> None:
     with expectation:
         chat = Chat(title=title)
         chat.add_message(message=message)
@@ -97,7 +97,7 @@ def test_new_message_events(
         message: Message,
         title: Title,
         expectation: Any,
-):
+) -> None:
     with expectation:
         chat = Chat(title=title)
         chat.add_message(message=message)

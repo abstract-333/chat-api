@@ -11,6 +11,9 @@ from infra.repositories.base import BaseChatRepository
 class MemoryChatRepository(BaseChatRepository):
     _saved_chats: list[Chat] = field(default_factory=list, kw_only=True)
 
+    def get_chats(self) -> list[Chat]:
+        return self._saved_chats
+
     async def check_chat_exists_by_title(self, title: str) -> bool:
         try:
             return bool(

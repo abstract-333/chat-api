@@ -45,7 +45,8 @@ class Mediator:
     async def publish(self, events: Iterable[ET]) -> Iterable[ER]:
         event_type = events.__class__
         handlers = self.events_map.get(event_type)
-
+        print(f"publish {event_type}")
+        print(f"publish {handlers}")
         if not handlers:
             raise EventHandlersNotRegisteredException(event_type)
 
