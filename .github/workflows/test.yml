@@ -21,12 +21,6 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Define a cache dependency glob
-        uses: astral-sh/setup-uv@v3
-        with:
-          enable-cache: true
-          cache-dependency-glob: "requirements**.txt"
-
       - name: Install dependencies
         run: |
           pip install uv
@@ -46,6 +40,3 @@ jobs:
 
       - name: Test with pytest
         run: pytest
-
-      - name: Minimize uv cache
-        run: uv cache prune --ci
