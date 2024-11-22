@@ -25,7 +25,9 @@ jobs:
         uses: astral-sh/setup-uv@v3
 
       - name: Install dependencies
-        run: uv pip install -r pyproject.toml
+        run: |
+          pip install uv
+          uv pip install -r pyproject.toml
         env:
           UV_SYSTEM_PYTHON: 1
 
