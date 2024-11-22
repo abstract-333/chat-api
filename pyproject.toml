@@ -27,9 +27,6 @@ pre-commit = "^4.0.1"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.uv.pip]
-system = true
-
 [tool.isort]
 multi_line_output = 3
 include_trailing_comma = true
