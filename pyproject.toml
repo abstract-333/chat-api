@@ -1,31 +1,31 @@
-[tool.poetry]
+[project]
+authors = [
+    { name = "Bashar Hasan - Abstract-333", email = "basharhasan74@gmail.com" },
+]
+requires-python = "<4.0,>=3.11"
+dependencies = [
+    "fastapi[standard]<1.0.0,>=0.112.0",
+    "motor<4.0.0,>=3.5.1",
+    "uvicorn<1.0.0,>=0.30.6",
+    "pytest<9.0.0,>=8.3.2",
+    "pytest-asyncio<1.0.0,>=0.24.0",
+    "faker<29.0.0,>=28.0.0",
+    "punq<1.0.0,>=0.7.0",
+    "httpx<1.0.0,>=0.27.2",
+    "poetry-plugin-export<2.0.0,>=1.8.0",
+]
 name = "ddd-fastapi"
 version = "0.1.0"
 description = ""
-authors = ["bashar <basharhasan74@gmail.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.11"
-fastapi = { extras = ["standard"], version = "^0.112.0" }
-motor = "^3.5.1"
-uvicorn = { extras = ["all"], version = "^0.30.6" }
-pytest = "^8.3.2"
-pytest-asyncio = "^0.24.0"
-faker = "^28.0.0"
-punq = "^0.7.0"
-httpx = "^0.27.2"
-poetry-plugin-export = "^1.8.0"
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.10.0"
-isort = "^5.13.2"
-mypy = "^1.13.0"
-pre-commit = "^4.0.1"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = [
+    "black<25.0.0,>=24.10.0",
+    "isort<6.0.0,>=5.13.2",
+    "mypy<2.0.0,>=1.13.0",
+    "pre-commit<5.0.0,>=4.0.1",
+]
 
 [tool.isort]
 multi_line_output = 3

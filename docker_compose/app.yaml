@@ -1,6 +1,11 @@
 version: '3.9'
+
 networks:
-  dev:
+  backend:
+    driver: bridge
+
+  web:
+    driver: bridge
 
 
 services:
@@ -17,7 +22,8 @@ services:
     volumes:
       - ../app/:/app/
     networks:
-      - dev
+      - backend
+      - web
 
 
   nginx:
@@ -30,4 +36,4 @@ services:
     depends_on:
       - main-app
     networks:
-      - dev
+      - web
