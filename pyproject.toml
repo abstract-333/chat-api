@@ -6,13 +6,12 @@ requires-python = "<4.0,>=3.11"
 dependencies = [
     "fastapi[standard]<1.0.0,>=0.112.0",
     "motor<4.0.0,>=3.5.1",
-    "uvicorn<1.0.0,>=0.30.6",
+    "uvicorn[all]>=0.30.6,<1.0.0",
     "pytest<9.0.0,>=8.3.2",
     "pytest-asyncio<1.0.0,>=0.24.0",
     "faker<29.0.0,>=28.0.0",
     "punq<1.0.0,>=0.7.0",
     "httpx<1.0.0,>=0.27.2",
-    "poetry-plugin-export<2.0.0,>=1.8.0",
 ]
 name = "ddd-fastapi"
 version = "0.1.0"

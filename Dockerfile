@@ -1,21 +1,28 @@
-FROM python:3.12.1-slim-bullseye
+FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim AS builder
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
 
 WORKDIR /app
 
-RUN apt update -y && \
-    apt install -y python3-dev \
-    gcc \
-    musl-dev
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project --no-dev
 
-ADD pyproject.toml /app
+ADD . /app
 
-RUN pip install --upgrade pip
-RUN pip install poetry
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev
 
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-root --no-interaction --no-ansi
 
-COPY /app/* /app/
+# It is important to use the image that matches the builder, as the path to the
+# Python executable must be the same, e.g., using `python:3.12-slim-bookworm`
+# will fail.
+FROM python:3.12-slim-bookworm
+
+# Copy the application from the builder
+COPY --from=builder --chown=app:app /app /app
+WORKDIR /app
+
+# Place executables in the environment at the front of the path
+ENV PATH="/app/.venv/bin:$PATH"

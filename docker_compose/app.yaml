@@ -7,7 +7,6 @@ networks:
   web:
     driver: bridge
 
-
 services:
   main-app:
     build:
@@ -21,6 +20,7 @@ services:
       - ../.env
     volumes:
       - ../app/:/app/
+      - /app/.venv
     networks:
       - backend
       - web
