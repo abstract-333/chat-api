@@ -39,4 +39,4 @@ jobs:
           cat .env
 
       - name: Test with pytest
-        run: pytest
+        run: uv run pytest
