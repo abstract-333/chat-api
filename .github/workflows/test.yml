@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv pip install -r pyproject.toml
+          uv sync --no-dev
         env:
           UV_SYSTEM_PYTHON: 1
 
