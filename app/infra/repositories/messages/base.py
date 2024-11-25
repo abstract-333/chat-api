@@ -10,9 +10,6 @@ from domain.entities.messages import Chat
 @dataclass
 class BaseChatRepository(ABC):
     @abstractmethod
-    def get_chats(self) -> list[Chat]: ...
-
-    @abstractmethod
     async def check_chat_exists_by_title(self, title: str) -> bool: ...
 
     @abstractmethod
