@@ -12,6 +12,7 @@ dependencies = [
     "faker<29.0.0,>=28.0.0",
     "punq<1.0.0,>=0.7.0",
     "httpx<1.0.0,>=0.27.2",
+    "pydantic-settings>=2.6.1",
 ]
 name = "ddd-fastapi"
 version = "0.1.0"
