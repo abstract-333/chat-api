@@ -17,7 +17,7 @@ Chat REST API project that implements DDD pattern.
 ### Install from git:
 
 ```shell
-$ git clone https://github.com/abstract-333/ddd-fastapi.git
+$ git clone https://github.com/abstract-333/chat-api.git
 
 $ cd ddd-fastapi
 ```
