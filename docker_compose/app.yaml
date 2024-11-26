@@ -24,16 +24,3 @@ services:
     networks:
       - backend
       - web
-
-
-  nginx:
-    image: nginx:stable-alpine
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - '../nginx.conf:/etc/nginx/nginx.conf'
-    depends_on:
-      - main-app
-    networks:
-      - web

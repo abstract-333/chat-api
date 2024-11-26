@@ -9,10 +9,10 @@ from logic.init import _init_container
 
 
 def init_dummy_container() -> Container:
-    container: Container = _init_container()
+    container = _init_container()
     container.register(
-        service=BaseChatRepository,
-        factory=MemoryChatRepository,
+        BaseChatRepository,
+        MemoryChatRepository,
         scope=Scope.singleton,
     )
 
