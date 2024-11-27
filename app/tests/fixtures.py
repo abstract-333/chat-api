@@ -3,15 +3,15 @@ from punq import (
     Scope,
 )
 
-from infra.repositories.messages.base import BaseChatRepository
-from infra.repositories.messages.memory import MemoryChatRepository
+from infra.repositories.chats.base import BaseChatsRepository
+from infra.repositories.chats.memory import MemoryChatRepository
 from logic.init import _init_container
 
 
 def init_dummy_container() -> Container:
     container = _init_container()
     container.register(
-        BaseChatRepository,
+        BaseChatsRepository,
         MemoryChatRepository,
         scope=Scope.singleton,
     )

@@ -34,8 +34,7 @@ def create_app() -> FastAPI:
             )
 
     fastapi_app = FastAPI(
-        title="DDD Fastapi",
-        description="A simple kafka + ddd example",
+        title="Chat API",
         debug=True,
         docs_url=None,
         redoc_url=None,
