@@ -3,8 +3,8 @@ from punq import (
     Scope,
 )
 
-from infra.repositories.chats.base import BaseChatsRepository
-from infra.repositories.chats.memory import MemoryChatRepository
+from infra.repositories.base import BaseChatsRepository
+from infra.repositories.memory import MemoryChatRepository
 from logic.init import _init_container
 
 

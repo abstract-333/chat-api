@@ -4,7 +4,7 @@ from dataclasses import (
 )
 
 from domain.entities.messages import Chat
-from infra.repositories.chats.base import BaseChatsRepository
+from infra.repositories.base import BaseChatsRepository
 
 
 @dataclass

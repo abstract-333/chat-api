@@ -4,7 +4,10 @@ from abc import (
 )
 from dataclasses import dataclass
 
-from domain.entities.messages import Chat
+from domain.entities.messages import (
+    Chat,
+    Message,
+)
 
 
 @dataclass
@@ -14,3 +17,9 @@ class BaseChatsRepository(ABC):
 
     @abstractmethod
     async def add_chat(self, chat: Chat) -> None: ...
+
+
+@dataclass
+class BaseMessagesRepository(ABC):
+    @abstractmethod
+    async def add_message(self, chat_oid: str, message: Message) -> None: ...

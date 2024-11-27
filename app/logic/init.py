@@ -6,8 +6,8 @@ from punq import (
     Scope,
 )
 
-from infra.repositories.chats.base import BaseChatsRepository
-from infra.repositories.chats.mongo import MongoDBChatsRepository
+from infra.repositories.base import BaseChatsRepository
+from infra.repositories.mongo import MongoDBChatsRepository
 from logic.commands.messages import (
     CreateChatCommand,
     CreateChatCommandHandler,
