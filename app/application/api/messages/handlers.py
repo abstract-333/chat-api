@@ -11,7 +11,7 @@ from application.api.messages.schemas import (
 )
 from application.api.schemas import ErrorSchema
 from domain.exceptions.base import ApplicationException
-from logic.commands.messages import CreateChatCommand
+from logic.commands.chats import CreateChatCommand
 from logic.init import init_container
 from logic.mediator import Mediator
 
@@ -31,8 +31,8 @@ router = APIRouter(
     },
 )
 async def create_chat_handler(
-        schema: CreateChatInSchema,
-        container=Depends(dependency=init_container),
+    schema: CreateChatInSchema,
+    container=Depends(dependency=init_container),
 ) -> CreateChatOutSchema:
     """Create New Chat"""
     mediator: Mediator = container.resolve(Mediator)
@@ -43,7 +43,8 @@ async def create_chat_handler(
 
     except ApplicationException as exception:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail={"error": exception.message},
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"error": exception.message},
         )
 
     return CreateChatOutSchema.from_entity(chat=chat)
