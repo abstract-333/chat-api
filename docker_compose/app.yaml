@@ -7,6 +7,9 @@ networks:
   web:
     driver: bridge
 
+  loki:
+    driver: bridge
+
 services:
   main-app:
     build:
@@ -24,3 +27,4 @@ services:
     networks:
       - backend
       - web
+      - loki

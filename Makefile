@@ -5,6 +5,7 @@ ENV = --env-file .env
 APP_FILE = docker_compose/app.yaml
 STORAGES_FILE = docker_compose/storages.yaml
 SERVER_FILE = docker_compose/server.yaml
+LOGGERS_FILE = docker_compose/loggers.yaml
 APP_CONTAINER = main-app
 
 
@@ -23,6 +24,11 @@ server:
 	${DC} -f ${SERVER_FILE} ${ENV} up --build -d
 
 
+.PHONY: loggers
+loggers:
+	${DC} -f ${LOGGERS_FILE} ${ENV} up --build -d
+
+
 .PHONY: storages
 storages:
 	${DC} -f ${STORAGES_FILE} ${ENV} up --build -d
@@ -36,6 +42,10 @@ app-down:
 .PHONY: server-down
 server-down:
 	${DC} -f ${SERVER_FILE} down
+
+.PHONY: loggers-down
+loggers-down:
+	${DC} -f ${LOGGERS_FILE} down
 
 
 .PHONY: storages-down
