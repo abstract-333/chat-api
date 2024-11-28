@@ -66,6 +66,10 @@ app-logs:
 server-logs:
 	${DC} -f ${SERVER_FILE} logs -f
 
+.PHONY: loggers-logs
+loggers-logs:
+	${DC} -f ${LOGGERS_FILE} logs -f
+
 
 .PHONY: app-shell
 app-shell:
