@@ -28,15 +28,15 @@ jobs:
         env:
           UV_SYSTEM_PYTHON: 1
 
-      - name: Create env file
+      - name: Set environment variables
+        env:
+          API_PORT: ${{ secrets.API_PORT }}
+          PYTHONPATH: ${{ secrets.PYTHONPATH }}
+          MONGO_DB_CONNECTION_URI: ${{ secrets.MONGO_DB_CONNECTION_URI }}
+          MONGO_DB_ADMIN_USERNAME: ${{ secrets.MONGO_DB_ADMIN_USERNAME }}
+          MONGO_DB_ADMIN_PASSWORD: ${{ secrets.MONGO_DB_ADMIN_PASSWORD }}
         run: |
-          touch .env
-          echo API_PORT=${{ secrets.API_PORT }} >> .env
-          echo PYTHONPATH=${{ secrets.PYTHONPATH }} >> .env
-          echo MONGO_DB_CONNECTION_URI=${{ secrets.MONGO_DB_CONNECTION_URI }} >> .env
-          echo MONGO_DB_ADMIN_USERNAME=${{ secrets.MONGO_DB_ADMIN_USERNAME }} >> .env
-          echo MONGO_DB_ADMIN_PASSWORD=${{ secrets.MONGO_DB_ADMIN_PASSWORD }} >> .env
-          cat .env
+          echo "Environment variables set."
 
       - name: Test with pytest
         run: uv run pytest
