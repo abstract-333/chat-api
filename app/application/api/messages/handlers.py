@@ -22,6 +22,7 @@ from logic.commands.messages import (
 from logic.exceptions.messages import ChatNotFoundException
 from logic.init import init_container
 from logic.mediator import Mediator
+from utils.uuid_4 import get_uuid4
 
 
 router = APIRouter(
@@ -63,9 +64,29 @@ async def create_chat_handler(
     status_code=status.HTTP_201_CREATED,
     description="Add new message to chat, if chat not exists, it will raise 404 status code",
     responses={
-        status.HTTP_201_CREATED: {"model": CreateMessageSchema},
-        status.HTTP_400_BAD_REQUEST: {"model": ErrorSchema},
-        status.HTTP_404_NOT_FOUND: {"model": ErrorSchema},
+        status.HTTP_201_CREATED: {
+            "model": CreateMessageSchema,
+            "content": {
+                "application/json": {
+                    "example": {"id": get_uuid4(), "title": "Message Example"},
+                },
+            },
+        },
+        status.HTTP_400_BAD_REQUEST: {
+            "model": ErrorSchema,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "model": ErrorSchema,
+            "content": {
+                "application/json": {
+                    "example": {
+                        "detail": {
+                            "error": f"Chat with this oid {get_uuid4()} not found",
+                        },
+                    },
+                },
+            },
+        },
     },
 )
 async def create_message_handler(
@@ -81,7 +102,8 @@ async def create_message_handler(
         )
     except ChatNotFoundException as exception:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail={"error": exception.message},
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"error": exception.message},
         )
     except ApplicationException as exception:
         raise HTTPException(
