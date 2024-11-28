@@ -29,14 +29,9 @@ jobs:
           UV_SYSTEM_PYTHON: 1
 
       - name: Set environment variables
-        env:
-          API_PORT: ${{ secrets.API_PORT }}
-          PYTHONPATH: ${{ secrets.PYTHONPATH }}
-          MONGO_DB_CONNECTION_URI: ${{ secrets.MONGO_DB_CONNECTION_URI }}
-          MONGO_DB_ADMIN_USERNAME: ${{ secrets.MONGO_DB_ADMIN_USERNAME }}
-          MONGO_DB_ADMIN_PASSWORD: ${{ secrets.MONGO_DB_ADMIN_PASSWORD }}
         run: |
-          echo "Environment variables set."
+          cp .env.example .env  # Copy .env.example to .env if .env is not available
+          cat .env  # Verify the .env file content
 
       - name: Test with pytest
         run: uv run pytest
