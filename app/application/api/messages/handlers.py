@@ -60,7 +60,7 @@ async def create_chat_handler(
 
 
 @router.post(
-    path="/{chat_oid}/messages",
+    path="/{chat_oid}/message",
     status_code=status.HTTP_201_CREATED,
     description="Add new message to chat, if chat not exists, it will raise 404 status code",
     responses={
