@@ -171,19 +171,9 @@ chat-api/
 
 The Chat API provides the following endpoints:
 
-- **Authentication**:
-  - `POST /auth/login`: Authenticate a user and receive a token.
-  - `POST /auth/register`: Register a new user.
-
-- **Users**:
-  - `GET /users/`: Retrieve a list of users.
-  - `GET /users/{user_id}`: Retrieve a specific user by ID.
-
 - **Chats**:
-  - `POST /chats/`: Create a new chat.
-  - `GET /chats/{chat_id}`: Retrieve a specific chat by ID.
-  - `POST /chats/{chat_id}/messages`: Send a message in a chat.
-  - `GET /chats/{chat_id}/messages`: Retrieve messages from a chat.
+  - `POST /chat/`: Create a new chat.
+  - `POST /chat/{chat_oid}/message`: Send a message in a chat.
 
 
 For detailed request and response schemas, refer to the [API Documentation](http://localhost:8000/docs).
