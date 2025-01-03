@@ -1,4 +1,6 @@
 # Chat API
+![Build Status](https://img.shields.io/github/workflow/status/abstract-333/chat-api/CI?label=build)
+![Test Coverage](https://coveralls.io/repos/github/abstract-333/chat-api/badge.svg)
 
 A robust Chat REST API built with FastAPI, following the Domain-Driven Design (DDD) pattern. This project is containerized using Docker, employs GitHub Actions for continuous integration, integrates Loki for centralized logging, and utilizes a Makefile for streamlined project management.
 
