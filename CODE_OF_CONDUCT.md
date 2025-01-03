@@ -20,14 +20,6 @@ Examples of unacceptable behavior by participants include:
 - Publishing others' private information, such as a physical or electronic address, without explicit permission.
 - Other conduct that could reasonably be considered inappropriate in a professional setting.
 
-## Supporting Ukraine and Humanity
-
-As part of our commitment to humanity and global solidarity, we stand in support of Ukraine and all communities affected by violence and injustice. We encourage acts of kindness, compassion, and collaboration to promote peace and equity worldwide. Contributors are encouraged to:
-
-- Support open-source projects that assist humanitarian efforts.
-- Share resources that raise awareness of global crises, such as the conflict in Ukraine.
-- Actively work towards a more inclusive and supportive environment for all.
-
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at [basharhasan74@gmail.com](mailto:basharhasan74@gmail.com). All complaints will be reviewed and investigated promptly and fairly.
