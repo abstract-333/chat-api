@@ -78,8 +78,8 @@ app-shell:
 
 .PHONY: format
 format:
-	${EXEC} ${APP_CONTAINER} black .
-	${EXEC} ${APP_CONTAINER} isort .
+	${EXEC} uvx ${APP_CONTAINER} ruff format .
+	${EXEC} uvx ${APP_CONTAINER} isort .
 
 
 .PHONY: test
