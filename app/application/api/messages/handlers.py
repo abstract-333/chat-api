@@ -54,7 +54,7 @@ async def create_chat_handler(
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={"error": exception.message},
-        )
+        ) from exception
 
     return CreateChatOutSchema.from_entity(chat=chat)
 
@@ -104,10 +104,10 @@ async def create_message_handler(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail={"error": exception.message},
-        )
+        ) from exception
     except ApplicationException as exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={"error": exception.message},
-        )
+        ) from exception
     return CreateMessageResponseSchema.from_entity(message=message)
