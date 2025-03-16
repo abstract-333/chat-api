@@ -45,7 +45,6 @@ def convert_message_document_to_entity(
 
 
 def convert_chat_entity_to_document(chat: Chat) -> ChatDocument:
-
     return {
         "oid": chat.oid,
         "title": chat.title.as_generic_type(),

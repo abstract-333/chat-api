@@ -37,7 +37,6 @@ class BaseMongoDBRepository(ABC):
 
 @dataclass
 class MongoDBChatsRepository(BaseChatsRepository, BaseMongoDBRepository):
-
     async def get_chat_by_oid(self, oid: str) -> Chat | None:
         chat_document = await self._collection.find_one(filter={"oid": oid})
         if not chat_document:

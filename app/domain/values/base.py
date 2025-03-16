@@ -10,12 +10,18 @@ from typing import (
 )
 
 
+
+
+
+
 VT = TypeVar("VT", bound=Any)
 
 
 @dataclass(frozen=True)
 class BaseValueObject(ABC, Generic[VT]):
     value: VT
+
+
 
     def __post_init__(self) -> None:
         self.validate()

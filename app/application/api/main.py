@@ -39,6 +39,7 @@ def create_app() -> FastAPI:
         docs_url=None,
         redoc_url=None,
     )
+
     register_static_docs_routes(app=fastapi_app)
     fastapi_app.include_router(prefix="/chat", router=message_router)
     return fastapi_app

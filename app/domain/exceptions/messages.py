@@ -14,7 +14,6 @@ class TextTooLongException(ApplicationException):
 
 @dataclass(eq=False)
 class EmptyTextError(ApplicationException):
-
     @property
     def message(self) -> str:
         return "Text can't be empty"

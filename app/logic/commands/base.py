@@ -11,8 +11,7 @@ from typing import (
 
 
 @dataclass(frozen=True)
-class BaseCommand(ABC):
-    ...
+class BaseCommand(ABC): ...
 
 
 CT = TypeVar("CT", bound=BaseCommand)

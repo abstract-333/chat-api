@@ -21,7 +21,6 @@ class BaseMemoryRepository(ABC):
 
 @dataclass
 class MemoryChatRepository(BaseChatsRepository, BaseMemoryRepository):
-
     async def check_chat_exists_by_title(self, title: str) -> bool:
         try:
             return bool(
