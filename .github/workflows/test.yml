@@ -21,6 +21,10 @@ jobs:
         with:
           python-version: "3.11"
 
+      - uses: astral-sh/ruff-action@v3
+      - run: ruff check
+      - run: ruff format
+
       - name: Install dependencies
         run: |
           pip install uv

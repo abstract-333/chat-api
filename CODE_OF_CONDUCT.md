@@ -37,4 +37,3 @@ This Code of Conduct is adapted from the [Contributor Covenant, version 2.1](htt
 ---
 
 Thank you for helping us create a welcoming and productive environment for everyone.
-
