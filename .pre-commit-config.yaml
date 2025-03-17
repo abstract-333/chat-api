@@ -23,8 +23,10 @@ repos:
       - id: ruff-format
 
   - repo: https://github.com/pycqa/isort
+    # Isort version.
     rev: 5.13.2
     hooks:
+      # Run imports formatter.
       - id: isort
 ci:
   autofix_commit_msg: 🎨 [pre-commit.ci] Auto format from pre-commit.com hooks
