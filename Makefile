@@ -66,6 +66,7 @@ app-logs:
 server-logs:
 	${DC} -f ${SERVER_FILE} logs -f
 
+
 .PHONY: loggers-logs
 loggers-logs:
 	${DC} -f ${LOGGERS_FILE} logs -f
@@ -74,12 +75,6 @@ loggers-logs:
 .PHONY: app-shell
 app-shell:
 	${EXEC} ${APP_CONTAINER} bash
-
-
-.PHONY: format
-format:
-	${EXEC} uvx ${APP_CONTAINER} ruff format .
-	${EXEC} uvx ${APP_CONTAINER} isort .
 
 
 .PHONY: test
