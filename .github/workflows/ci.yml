@@ -27,7 +27,9 @@ jobs:
             .pre-commit-config.yaml
 
       - name: Install pre-commit and isort
-        run: uv install pre-commit isort
+        run: uv pip install pre-commit isort
+        env:
+          UV_SYSTEM_PYTHON: 1
 
 
       - name: Execute Pre-Commit
