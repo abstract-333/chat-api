@@ -24,7 +24,7 @@ repos:
 
   - repo: https://github.com/pycqa/isort
     # Isort version.
-    rev: 5.13.2
+    rev: 6.0.1
     hooks:
       # Run imports formatter.
       - id: isort
