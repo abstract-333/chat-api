@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
 
+
 jobs:
   build:
 
@@ -25,10 +26,15 @@ jobs:
       - run: ruff check
       - run: ruff format
 
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.7"
+          enable-cache: true
+          cache-dependency-glob: pyproject.toml
+
       - name: Install dependencies
-        run: |
-          pip install uv
-          uv sync --no-dev
+        run: uv sync --no-dev
         env:
           UV_SYSTEM_PYTHON: 1
 
