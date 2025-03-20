@@ -62,10 +62,10 @@ dependencies = [
 [package.dev-dependencies]
 dev = [
     { name = "isort" },
-    { name = "mypy" },
     { name = "pre-commit" },
 ]
 lint = [
+    { name = "mypy" },
     { name = "ruff" },
 ]
 
@@ -85,10 +85,12 @@ requires-dist = [
 [package.metadata.requires-dev]
 dev = [
     { name = "isort", specifier = ">=5.13.2,<6.0.0" },
-    { name = "mypy", specifier = ">=1.13.0,<2.0.0" },
     { name = "pre-commit", specifier = ">=4.0.1,<5.0.0" },
 ]
-lint = [{ name = "ruff", specifier = ">=0.11.0" }]
+lint = [
+    { name = "mypy", specifier = ">=1.15.0" },
+    { name = "ruff", specifier = ">=0.11.0" },
+]
 
 [[package]]
 name = "click"
