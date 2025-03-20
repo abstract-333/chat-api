@@ -60,8 +60,13 @@ Ensure you have the following installed:
    ```bash
    cp .env.example .env
    ```
+3. **Run Make Commands**:
 
-   Ensure to set the appropriate values in the `.env` file.
+   It will start the app, just FastAPI application:
+
+   ```bash
+   make app
+   ```
 
 ### Running the Application
 
@@ -168,6 +173,53 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   make test
   ```
   Executes the test suite.
+
+---
+
+### **Docker**
+
+This project includes Docker configurations for both **development** and **production** environments. The Docker images
+are built using two different Dockerfiles, `dev.Dockerfile` for development and `prod.Dockerfile` for production, with
+the configuration driven by environment variables defined in `.env` files.
+
+#### **Dockerfiles Overview**
+
+- **`prod.Dockerfile`**: Used for building the Docker image in the **production** environment. It runs with **Gunicorn**
+  and **UvicornWorker** for handling multiple requests efficiently in a production setting. No file watching or
+  reloading is enabled. This environment only includes the **production dependencies**, ensuring a minimal and optimized
+  setup for performance.
+
+- **`dev.Dockerfile`**: Used for building the Docker image in the **development** environment. It runs with **Uvicorn**
+  in **reload mode** and is configured to watch file changes, making it suitable for active development. In this
+  environment, **development dependencies** (including testing tools like `pytest`) are installed, allowing you to run
+  tests and develop in an interactive manner.
+
+#### **Environment Configuration**
+
+- The **environment files** (`.env`, `.env.prod`) are used to provide dynamic configuration based on the environment.
+
+### **Makefile Commands**
+
+- **`make app-prod`**:
+  Builds and runs the production environment by using `.env.prod` for configuration. The app will run with **Gunicorn
+  ** (without reloading or volume watching) to handle production-level traffic. It uses **only production dependencies
+  **, ensuring a lightweight and optimized container.
+
+  ```bash
+  make app-prod
+  ```
+
+- **`make app`**:
+  Builds and runs the development environment by using `.env` for configuration. The app will run with **Uvicorn** in *
+  *reload mode**, allowing live code reloading and volume watching for a smoother development experience. In this
+  environment, **development dependencies** are installed, including tools like `pytest` for testing purposes. This
+  setup allows you to perform tests within the development container, not in production.
+
+  ```bash
+  make app
+  ```
+
+---
 
 ## Project Structure
 
