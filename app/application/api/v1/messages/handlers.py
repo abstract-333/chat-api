@@ -7,13 +7,13 @@ from fastapi.routing import APIRouter
 
 from punq import Container
 
-from application.api.messages.schemas import (
+from application.api.v1.exceptions.schemas import ErrorSchema
+from application.api.v1.messages.schemas import (
     CreateChatInSchema,
     CreateChatOutSchema,
     CreateMessageResponseSchema,
     CreateMessageSchema,
 )
-from application.api.schemas import ErrorSchema
 from domain.exceptions.base import ApplicationException
 from logic.commands.messages import (
     CreateChatCommand,
