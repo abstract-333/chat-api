@@ -187,13 +187,13 @@ The `Makefile` provides a set of commands to manage and run various parts of the
 ├── 📂 config
 │   └── 📄 loki-config.yaml     # Configuration for Loki logger
 │   └── 📄 nginx.yaml           # Configuration for Nginx logger
-│   └── 📄 protmail-config.yaml # Configuration for Nginx logger
+│   └── 📄 protmail-config.yaml # Configuration for Protmail logger
 ├── 📂 docker_compose
-│   ├── 📄 app.yaml             # MongoDB initialization script
-│   └── 📄 loggers.yml          # Docker Compose configuration
-│   └── 📄 server.yml           # Docker Compose configuration
-│   └── 📄 storages.yml         # Docker Compose configuration
-│   └── 📄 storages_ui.yml      # Docker Compose configuration
+│   ├── 📄 app.yaml             # Main App
+│   └── 📄 loggers.yml          # Loggers - Protmail, Granafa and Loki
+│   └── 📄 server.yml           # Proxy Server - Nginx
+│   └── 📄 storages.yml         # Storages - Mongo DB
+│   └── 📄 storages_ui.yml      # Storages Admin Interface - Mongo Express
 .
 .
 .
