@@ -2,6 +2,7 @@ DC = docker compose
 EXEC = docker exec -t
 LOGS = docker logs
 ENV = --env-file .env
+ENV_PROD = --env-file .env.prod
 APP_FILE = docker_compose/app.yaml
 STORAGES_FILE = docker_compose/storages.yaml
 STORAGES_UI_FILE = docker_compose/storages_ui.yaml
@@ -15,9 +16,17 @@ all:
 	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${ENV} up --build -d
 
 
+.PHONY: all-prod
+all-prod:
+	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${ENV_PROD} up --build -d
+
 .PHONY: app
 app:
 	${DC} -f ${APP_FILE} ${ENV} up --build -d
+
+.PHONY: app-prod
+app-prod:
+	${DC} -f ${APP_FILE} ${ENV_PROD} up --build -d
 
 
 .PHONY: server
@@ -34,9 +43,11 @@ loggers:
 storages-pure:
 	${DC} -f ${STORAGES_FILE} ${ENV} up --build -d
 
+
 .PHONY: storages
 storages:
 	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} ${ENV} up --build -d
+
 
 .PHONY: app-down
 app-down:
@@ -46,6 +57,7 @@ app-down:
 .PHONY: server-down
 server-down:
 	${DC} -f ${SERVER_FILE} down
+
 
 .PHONY: loggers-down
 loggers-down:
@@ -70,6 +82,7 @@ all-down:
 .PHONY: app-logs
 app-logs:
 	${LOGS} ${APP_CONTAINER} -f
+
 
 .PHONY: server-logs
 server-logs:
