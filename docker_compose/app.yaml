@@ -12,15 +12,14 @@ services:
   main-app:
     build:
       context: ..
-      dockerfile: Dockerfile
+      dockerfile: ${DOCKERFILE}
     container_name: main-app
     ports:
       - "${API_PORT}:8000"
-    command: "${WORKER} --factory application.api.main:create_app ${WORKERS_CONFIG} --host 0.0.0.0 --port 8000"
     env_file:
       - ../.env
     volumes:
-      - ../app/:/app/
+      - ${APP_VOLUME:-/dev/null}:/app/    # If APP_VOLUME is empty, mount /dev/null
       - /app/.venv
     networks:
       - storages

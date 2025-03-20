@@ -7,12 +7,10 @@ dependencies = [
     "fastapi[standard]<1.0.0,>=0.112.0",
     "motor<4.0.0,>=3.5.1",
     "uvicorn[all]>=0.30.6,<1.0.0",
-    "pytest<9.0.0,>=8.3.2",
-    "pytest-asyncio<1.0.0,>=0.24.0",
-    "faker<29.0.0,>=28.0.0",
     "punq<1.0.0,>=0.7.0",
     "httpx<1.0.0,>=0.27.2",
     "pydantic-settings>=2.6.1",
+    "uvicorn-worker>=0.3.0",
 ]
 name = "chat-api"
 version = "0.1.0"
@@ -27,6 +25,11 @@ dev = [
 lint = [
     "mypy>=1.15.0",
     "ruff>=0.11.0",
+]
+test = [
+    "faker>=28.4.1",
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.25.3",
 ]
 
 [tool.isort]

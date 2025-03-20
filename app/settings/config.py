@@ -16,5 +16,3 @@ class Config(BaseSettings):
     )
 
     debug: bool = Field(alias="DEBUG", default=True)
-    worker: str = Field(alias="WORKER")
-    workers_config: str = Field(alias="WORKERS_CONFIG")
