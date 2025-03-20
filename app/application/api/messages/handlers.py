@@ -25,9 +25,7 @@ from logic.mediator import Mediator
 from utils.uuid_4 import get_uuid4
 
 
-router = APIRouter(
-    tags=["Chat"],
-)
+router = APIRouter(tags=["Chat"], prefix="/chat")
 
 
 @router.post(
