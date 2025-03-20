@@ -258,6 +258,65 @@ the configuration driven by environment variables defined in `.env` files.
 └── 📄 uv.lock                  # UV dependency lock file
 ```
 
+Here’s the description you can add to your **README.md** file regarding the **Health Router** in your FastAPI
+application:
+
+---
+
+### **Health Check Endpoint**
+
+The application includes a **health check endpoint** to monitor the system's overall status, specifically the health of
+the **MongoDB** connection. The health check is provided through a dedicated router, which can be queried to determine
+whether the system and MongoDB are running properly.
+
+#### **Endpoint: `/health`**
+
+- **Method**: `GET`
+- **Tags**: Health
+- **Response Model**: `HealthOut` (custom schema for structured health check response)
+- **Description**: This endpoint performs a system-wide health check, including verifying MongoDB's availability by
+  attempting to ping the database.
+
+#### **How It Works**:
+
+- The health check route is defined in the `Health` router.
+- The system attempts to **ping MongoDB** using the `mongo_db_client` to ensure that the database is up and running.
+- If MongoDB responds successfully, the status is considered healthy, and the system will return a `healthy` status with
+  detailed MongoDB health info.
+- If MongoDB is not available or an error occurs during the ping, the system will return a status indicating that
+  MongoDB is down and provide the error details.
+
+#### **Example Response:**
+
+```json
+{
+  "status": "healthy",
+  "detail": {
+    "mongodb": "Ok"
+  }
+}
+```
+
+If MongoDB is unavailable:
+
+```json
+{
+  "status": "MongoDB is down",
+  "detail": {
+    "mongodb": "error: <error_message>"
+  }
+}
+```
+
+#### **Usage**:
+
+- This endpoint can be used to monitor the health of the application, especially MongoDB.
+- Typically, it can be integrated into **monitoring tools** or queried periodically to ensure the system is functioning
+  correctly.
+
+_This endpoint ensures that the core components of your system are functioning and allows for efficient monitoring and
+troubleshooting._
+
 ## API Endpoints
 
 The Chat API provides the following endpoints:
@@ -265,6 +324,8 @@ The Chat API provides the following endpoints:
 - **Chats**:
     - `POST /chat/`: Create a new chat.
     - `POST /chat/{chat_oid}/message`: Send a message in a chat.
+- **Health**:
+    - `Get /Health/`: health check.
 
 For detailed request and response schemas, refer to the [API Documentation](http://localhost:8000/api/docs).
 
