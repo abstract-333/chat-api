@@ -79,24 +79,40 @@ The `Makefile` provides a set of commands to manage and run various parts of the
 
 ### Usage Examples
 
-- **Start All Services**:
+- **Start All Services - Development**:
   ```bash
   make all
   ```
-  Starts the application, storages, server, and loggers.
+  Starts the application, storages, server, and loggers in **_development_** mode.
 
 
-- **Start Only the Application**:
+- **Start All Services - Production**:
+  ```bash
+  make all-prod
+  ```
+  Starts the application, storages, server, and loggers in **_production_** mode.
+
+
+- **Start Only the Application - Development**:
   ```bash
   make app
   ```
-  Starts the main application container - FastAPI.
+  Starts the main application container - FastAPI in **_development_** mode.
+
+
+- **Start Only the Application - Production**:
+  ```bash
+  make app-prod
+  ```
+  Starts the main application container - FastAPI in **_production_** mode.
+
 
 - **Start the Server**:
   ```bash
   make server
   ```
   Starts the Nginx server, which serves as a reverse proxy.
+-
 
 - **Start Storages**:
   ```bash
@@ -201,17 +217,17 @@ the configuration driven by environment variables defined in `.env` files.
 ### **Makefile Commands**
 
 - **`make app-prod`**:
-  Builds and runs the production environment by using `.env.prod` for configuration. The app will run with **Gunicorn
-  ** (without reloading or volume watching) to handle production-level traffic. It uses **only production dependencies
-  **, ensuring a lightweight and optimized container.
+  Builds and runs the production environment by using `.env.prod` for configuration. The app will run with **Gunicorn**(
+  without reloading or volume watching) to handle production-level traffic. It uses **only production dependencies**,
+  ensuring a lightweight and optimized container.
 
   ```bash
   make app-prod
   ```
 
 - **`make app`**:
-  Builds and runs the development environment by using `.env` for configuration. The app will run with **Uvicorn** in *
-  *reload mode**, allowing live code reloading and volume watching for a smoother development experience. In this
+  Builds and runs the development environment by using `.env` for configuration. The app will run with **Uvicorn** in
+  *reload mode*, allowing live code reloading and volume watching for a smoother development experience. In this
   environment, **development dependencies** are installed, including tools like `pytest` for testing purposes. This
   setup allows you to perform tests within the development container, not in production.
 
