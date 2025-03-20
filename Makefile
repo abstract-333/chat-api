@@ -12,7 +12,7 @@ APP_CONTAINER = main-app
 
 .PHONY: all
 all:
-	${DC} -f ${STORAGES_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${ENV} up --build -d
+	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${ENV} up --build -d
 
 
 .PHONY: app
@@ -64,7 +64,7 @@ storages-down:
 
 .PHONY: all-down
 all-down:
-	${DC} -f ${STORAGES_FILE} -f ${APP_FILE} -f ${SERVER_FILE} down
+	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} down
 
 
 .PHONY: app-logs
