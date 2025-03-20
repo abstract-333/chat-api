@@ -1,8 +1,8 @@
 networks:
-  backend:
+  storages:
     driver: bridge
 
-  web:
+  server:
     driver: bridge
 
   loki:
@@ -23,6 +23,6 @@ services:
       - ../app/:/app/
       - /app/.venv
     networks:
-      - backend
-      - web
+      - storages
+      - server
       - loki
