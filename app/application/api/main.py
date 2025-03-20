@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from application.api.static_docs import register_static_docs_routes
-from application.api.v1.health import router as health_router_v1
+from application.api.v1.health.handlers import router as health_router_v1
 from application.api.v1.messages.handlers import router as message_router_v1
 
 
