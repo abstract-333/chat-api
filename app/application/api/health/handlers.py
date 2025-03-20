@@ -27,7 +27,7 @@ async def health_check(
 
     return {
         "status": "healthy" if mongo_status == "ok" else "MongoDB is down",
-        "details": {
+        "detail": {
             "mongodb": mongo_status,
         },
     }
