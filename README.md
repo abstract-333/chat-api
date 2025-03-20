@@ -214,7 +214,7 @@ The Chat API provides the following endpoints:
     - `POST /chat/`: Create a new chat.
     - `POST /chat/{chat_oid}/message`: Send a message in a chat.
 
-For detailed request and response schemas, refer to the [API Documentation](http://localhost:8000/docs).
+For detailed request and response schemas, refer to the [API Documentation](http://localhost:8000/api/docs).
 
 ## Testing
 
