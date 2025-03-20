@@ -1,9 +1,12 @@
 # Chat API
-A robust Chat REST API built with FastAPI, following the Domain-Driven Design (DDD) pattern. This project is containerized using Docker, employs GitHub Actions for continuous integration, integrates Loki for centralized logging, and utilizes a Makefile for streamlined project management.
+
+A robust Chat REST API built with FastAPI, following the Domain-Driven Design (DDD) pattern. This project is
+containerized using Docker, employs GitHub Actions for continuous integration, integrates Loki for centralized logging,
+and utilizes a Makefile for streamlined project management.
 
 ## Features
 
-- **FastAPI**: High-performance web framework for building APIs with Python 3.12.
+- **FastAPI**: High-performance web framework for building APIs with Python 3.13.
 - **Domain-Driven Design (DDD)**: Structured approach to software design that emphasizes domain modeling.
 - **MongoDB & Mongo Express**: NoSQL database for storing chat data, with a web-based MongoDB admin interface.
 - **Nginx**: Reverse proxy server for handling client requests.
@@ -13,15 +16,17 @@ A robust Chat REST API built with FastAPI, following the Domain-Driven Design (D
 - **GitHub Actions**: Automated workflows for testing and formatting on each push and pull request.
 - **Docker & Docker Compose**: Containerization for easy setup and deployment.
 - **Makefile**: Simplifies common tasks such as setup, testing, and running the application.
-- **Optimized Docker Image**: Reduced FastAPI Docker image size from 700MB to 200MB by implementing multi-stage builds.
+- **Optimized Docker Image**: Reduced FastAPI Docker image size from 700MB to 205MB by implementing multi-stage builds.
 
-**Note:** Each service (loggers, servers, app, storages) is configured in its own Docker Compose file. This modular setup ensures optimal performance and easier troubleshooting, reducing potential conflicts.
+**Note:** Each service (loggers, servers, app, storages) is configured in its own Docker Compose file. This modular
+setup ensures optimal performance and easier troubleshooting, reducing potential conflicts.
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Application](#running-the-application)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Running the Application](#running-the-application)
 - [Makefile Commands](#makefile-commands)
 - [Project Structure](#project-structure)
 - [API Endpoints](#api-endpoints)
@@ -36,7 +41,8 @@ A robust Chat REST API built with FastAPI, following the Domain-Driven Design (D
 Ensure you have the following installed:
 
 - [Docker](https://www.docker.com/get-started)
-- **Makefile Execution Requirements**: Ensure that `make` is installed on your system. Most UNIX-like systems have it pre-installed.
+- **Makefile Execution Requirements**: Ensure that `make` is installed on your system. Most UNIX-like systems have it
+  pre-installed.
 
 ### Installation
 
@@ -59,7 +65,8 @@ Ensure you have the following installed:
 
 ### Running the Application
 
-The project includes a `Makefile` for simplified management. Refer to the [Makefile Commands](#makefile-commands) section for details.
+The project includes a `Makefile` for simplified management. Refer to the [Makefile Commands](#makefile-commands)
+section for details.
 
 ## Makefile Commands
 
@@ -73,11 +80,12 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   ```
   Starts the application, storages, server, and loggers.
 
+
 - **Start Only the Application**:
   ```bash
   make app
   ```
-  Starts the main application container.
+  Starts the main application container - FastAPI.
 
 - **Start the Server**:
   ```bash
@@ -91,11 +99,20 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   ```
   Starts MongoDB and Mongo Express. Mongo Express can be accessed at [http://localhost:28081](http://localhost:28081).
 
+
+- **Start Storages Without Admin Interface - MongoExpress**:
+  ```bash
+  make storages-pure
+  ```
+  Starts _**only**_ MongoDB.
+
+
 - **Start Loggers**:
   ```bash
   make loggers
   ```
   Builds and starts Loki and Grafana for centralized logging and monitoring.
+
 
 - **Stop the Application**:
   ```bash
@@ -103,11 +120,13 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   ```
   Stops the application container.
 
+
 - **Stop the Server**:
   ```bash
   make server-down
   ```
   Stops the Nginx server.
+
 
 - **Stop Loggers**:
   ```bash
@@ -115,11 +134,20 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   ```
   Stops Loki and Grafana.
 
+
 - **Stop Storages**:
   ```bash
   make storages-down
   ```
   Stops MongoDB and Mongo Express without erasing data.
+
+
+- **Stop Storages**:
+  ```bash
+  make storages-pure-down
+  ```
+  Stops MongoDB without erasing data.
+
 
 - **Stop All Services**:
   ```bash
@@ -127,11 +155,13 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   ```
   Stops all running services.
 
+
 - **View Application Logs**:
   ```bash
   make app-logs
   ```
   Displays logs from the application container.
+
 
 - **Run Tests**:
   ```bash
@@ -142,49 +172,60 @@ The `Makefile` provides a set of commands to manage and run various parts of the
 ## Project Structure
 
 ```plaintext
-chat-api/
-├── app/
-│   ├── api/                # API routes
-│   ├── core/               # Core settings and configurations
-│   ├── models/             # Database models
-│   ├── repositories/       # Data access layer
-│   ├── services/           # Business logic
-│   ├── main.py             # Application entry point
-│   └── ...
-├── config/
-│   ├── nginx/
-│   └── ...
-├── docker_compose/
-│   ├── docker-compose.yml  # Docker Compose configuration
-│   └── ...
-├── tests/
-│   ├── ...
-├── .env.example            # Example environment variables
-├── Dockerfile              # Docker build file
-├── Makefile                # Makefile for managing tasks
-├── README.md               # Project documentation
-└── ...
+📦 chat-api
+├── 📂 .github
+│   └── 📂 workflows
+│       └── 📄 ci.yml          # GitHub Actions CI workflow
+├── 📂 app
+│   ├── 📂 application
+│   ├── 📂 domain
+│   ├── 📂 infra
+│   ├── 📂 logic
+│   ├── 📂 settings
+│   ├── 📂 tests
+│   ├── 📂 utils
+├── 📂 config
+│   └── 📄 loki-config.yaml     # Configuration for Loki logger
+│   └── 📄 nginx.yaml           # Configuration for Nginx logger
+│   └── 📄 protmail-config.yaml # Configuration for Nginx logger
+├── 📂 docker_compose
+│   ├── 📄 app.yaml             # MongoDB initialization script
+│   └── 📄 loggers.yml          # Docker Compose configuration
+│   └── 📄 server.yml           # Docker Compose configuration
+│   └── 📄 storages.yml         # Docker Compose configuration
+│   └── 📄 storages_ui.yml      # Docker Compose configuration
+.
+.
+.
+├── 📄 .pre-commit-config.yaml  # Pre-commit hooks configuration
+├── 📄 Dockerfile
+├── 📄 Makefile
+├── 📄 mypy.ini                 # MyPy configuration
+├── 📄 pyproject.toml           # Python project configuration
+├── 📄 ruff.toml                # Ruff linter configuration
+└── 📄 uv.lock                  # UV dependency lock file
 ```
-
 
 ## API Endpoints
 
 The Chat API provides the following endpoints:
 
 - **Chats**:
-  - `POST /chat/`: Create a new chat.
-  - `POST /chat/{chat_oid}/message`: Send a message in a chat.
-
+    - `POST /chat/`: Create a new chat.
+    - `POST /chat/{chat_oid}/message`: Send a message in a chat.
 
 For detailed request and response schemas, refer to the [API Documentation](http://localhost:8000/docs).
 
 ## Testing
 
-The project includes extensive testing capabilities, designed to validate business logic independently of the database. This ensures that core functionalities can be tested efficiently without requiring a connection to MongoDB or other external services.
+The project includes extensive testing capabilities, designed to validate business logic independently of the database.
+This ensures that core functionalities can be tested efficiently without requiring a connection to MongoDB or other
+external services.
 
 - **Unit Tests**: Focused on individual components, testing business logic in isolation.
 - **Integration Tests**: Verify that different parts of the system work together as expected.
-- **Database-Free Testing**: The architecture allows for testing business logic independently of the database. Mocking or in-memory databases can be used to simulate data operations.
+- **Database-Free Testing**: The architecture allows for testing business logic independently of the database. Mocking
+  or in-memory databases can be used to simulate data operations.
 
 Run the test suite with:
 
