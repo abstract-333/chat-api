@@ -193,13 +193,13 @@ The `Makefile` provides a set of commands to manage and run various parts of the
 
 ---
 
-### **Docker**
+## **Docker**
 
 This project includes Docker configurations for both **development** and **production** environments. The Docker images
 are built using two different Dockerfiles, `dev.Dockerfile` for development and `prod.Dockerfile` for production, with
 the configuration driven by environment variables defined in `.env` files.
 
-#### **Dockerfiles Overview**
+### **Dockerfiles Overview**
 
 - **`prod.Dockerfile`**: Used for building the Docker image in the **production** environment. It runs with **Gunicorn**
   and **UvicornWorker** for handling multiple requests efficiently in a production setting. No file watching or
@@ -211,7 +211,7 @@ the configuration driven by environment variables defined in `.env` files.
   environment, **development dependencies** (including testing tools like `pytest`) are installed, allowing you to run
   tests and develop in an interactive manner.
 
-#### **Environment Configuration**
+### **Environment Configuration**
 
 - The **environment files** (`.env`, `.env.prod`) are used to provide dynamic configuration based on the environment.
 
@@ -277,13 +277,13 @@ the configuration driven by environment variables defined in `.env` files.
 
 ---
 
-### **Health Check Endpoint**
+## **Health Check Endpoint**
 
 The application includes a **health check endpoint** to monitor the system's overall status, specifically the health of
 the **MongoDB** connection. The health check is provided through a dedicated router, which can be queried to determine
 whether the system and MongoDB are running properly.
 
-#### **Endpoint: `/health`**
+### **Endpoint: `/health`**
 
 - **Method**: `GET`
 - **Tags**: Health
@@ -291,7 +291,7 @@ whether the system and MongoDB are running properly.
 - **Description**: This endpoint performs a system-wide health check, including verifying MongoDB's availability by
   attempting to ping the database.
 
-#### **How It Works**:
+### **How It Works**:
 
 - The health check route is defined in the `Health` router.
 - The system attempts to **ping MongoDB** using the `mongo_db_client` to ensure that the database is up and running.
@@ -300,7 +300,7 @@ whether the system and MongoDB are running properly.
 - If MongoDB is not available or an error occurs during the ping, the system will return a status indicating that
   MongoDB is down and provide the error details.
 
-#### **Example Response:**
+### **Example Response:**
 
 ```json
 {
@@ -322,7 +322,7 @@ If MongoDB is unavailable:
 }
 ```
 
-#### **Usage**:
+### **Usage**:
 
 - This endpoint can be used to monitor the health of the application, especially MongoDB.
 - Typically, it can be integrated into **monitoring tools** or queried periodically to ensure the system is functioning
