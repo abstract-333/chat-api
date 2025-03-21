@@ -16,7 +16,8 @@ and utilizes a Makefile for streamlined project management.
 - **GitHub Actions**: Automated workflows for testing and formatting on each push and pull request.
 - **Docker & Docker Compose**: Containerization for easy setup and deployment.
 - **Makefile**: Simplifies common tasks such as setup, testing, and running the application.
-- **Optimized Docker Image**: Reduced FastAPI Docker image size from 700MB to 205MB by implementing multi-stage builds.
+- **Optimized Docker Image**: Reduced FastAPI Docker image size from 700MB to 205MB for development container
+  and 185MB for production container by implementing multi-stage builds.
 
 **Note:** Each service (loggers, servers, app, storages) is configured in its own Docker Compose file. This modular
 setup ensures optimal performance and easier troubleshooting, reducing potential conflicts.
