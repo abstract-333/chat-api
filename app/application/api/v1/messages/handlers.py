@@ -19,7 +19,10 @@ from logic.commands.messages import (
     CreateChatCommand,
     CreateMessageCommand,
 )
-from logic.exceptions.messages import ChatNotFoundException
+from logic.exceptions.messages import (
+    ChatNotFoundException,
+    ChatWithThatTitleAlreadyExistsException,
+)
 from logic.init import init_container
 from logic.mediator import Mediator
 from utils.uuid_4 import get_uuid4
@@ -33,8 +36,26 @@ router = APIRouter(tags=["Chat"], prefix="/chat")
     status_code=status.HTTP_201_CREATED,
     description="Create new chat, if chat with current name exists, it will raise 400 status code",
     responses={
-        status.HTTP_201_CREATED: {"model": CreateChatOutSchema},
-        status.HTTP_400_BAD_REQUEST: {"model": ErrorSchema},
+        status.HTTP_201_CREATED: {
+            "model": CreateChatOutSchema,
+            "content": {
+                "application/json": {
+                    "example": {"oid": get_uuid4(), "title": "Title Example"},
+                },
+            },
+        },
+        status.HTTP_400_BAD_REQUEST: {
+            "model": ErrorSchema,
+            "content": {
+                "application/json": {
+                    "example": {
+                        "detail": {
+                            "error": 'Chat with this title "string" already exists'
+                        },
+                    },
+                },
+            },
+        },
     },
 )
 async def create_chat_handler(
@@ -47,6 +68,11 @@ async def create_chat_handler(
         chat, *_ = await mediator.handle_command(
             command=CreateChatCommand(title=schema.title),
         )
+    except ChatWithThatTitleAlreadyExistsException as exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"error": exception.message},
+        ) from exception
 
     except ApplicationException as exception:
         raise HTTPException(
@@ -66,7 +92,7 @@ async def create_chat_handler(
             "model": CreateMessageSchema,
             "content": {
                 "application/json": {
-                    "example": {"id": get_uuid4(), "title": "Message Example"},
+                    "example": {"oid": get_uuid4(), "title": "Message Example"},
                 },
             },
         },
