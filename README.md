@@ -138,9 +138,16 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   Builds and starts Loki and Grafana for centralized logging and monitoring.
 
 
-- **Stop the Application**:
+- **Stop the Application - Development**:
   ```bash
   make app-down
+  ```
+  Stops the application container.
+
+
+- **Stop the Application - Production**:
+  ```bash
+  make app-prod-down
   ```
   Stops the application container.
 
@@ -173,12 +180,18 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   Stops MongoDB without erasing data.
 
 
-- **Stop All Services**:
+- **Stop All Services - Development**:
   ```bash
   make all-down
   ```
   Stops all running services.
 
+
+- **Stop All Services - Production**:
+  ```bash
+  make all-prod-down
+  ```
+  Stops all running services.
 
 - **View Application Logs**:
   ```bash
