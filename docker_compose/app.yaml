@@ -19,7 +19,7 @@ services:
     env_file:
       - ../.env
     volumes:
-      - ${APP_VOLUME:-/dev/null}:/app/    # If APP_VOLUME is empty, mount /dev/null
+      - ../app/:/app/
       - /app/.venv
     networks:
       - storages
