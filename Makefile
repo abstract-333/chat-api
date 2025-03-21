@@ -9,24 +9,27 @@ STORAGES_UI_FILE = docker_compose/storages_ui.yaml
 SERVER_FILE = docker_compose/server.yaml
 LOGGERS_FILE = docker_compose/loggers.yaml
 APP_CONTAINER = main-app
-
+PROD=--profile prod
+DEV=--profile dev
 
 .PHONY: all
 all:
-	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${ENV} up --build -d
+	${DC} ${DEV} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} \
+ 	-f ${APP_FILE} -f ${SERVER_FILE} ${ENV} up --build -d
 
 
 .PHONY: all-prod
 all-prod:
-	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${ENV_PROD} up --build -d
+	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} \
+ 	-f ${SERVER_FILE} ${ENV_PROD} ${PROD} up --build -d
 
 .PHONY: app
 app:
-	${DC} -f ${APP_FILE} ${ENV} up --build -d
+	${DC} -f ${APP_FILE} ${ENV} ${DEV} up --build -d
 
 .PHONY: app-prod
 app-prod:
-	${DC} -f ${APP_FILE} ${ENV_PROD} up --build -d
+	${DC} -f ${APP_FILE} ${ENV_PROD} ${PROD} up --build -d
 
 
 .PHONY: server
@@ -51,7 +54,12 @@ storages:
 
 .PHONY: app-down
 app-down:
-	${DC} -f ${APP_FILE} down
+	${DC} -f ${APP_FILE} ${DEV} down
+
+
+.PHONY: app-prod-down
+app-prod-down:
+	${DC} -f ${APP_FILE} ${PROD} down
 
 
 .PHONY: server-down
@@ -76,7 +84,12 @@ storages-down:
 
 .PHONY: all-down
 all-down:
-	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} down
+	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${DEV} down
+
+
+.PHONY: all-prod-down
+all-prod-down:
+	${DC} -f ${STORAGES_FILE} -f ${STORAGES_UI_FILE} -f ${APP_FILE} -f ${SERVER_FILE} ${PROD} down
 
 
 .PHONY: app-logs
