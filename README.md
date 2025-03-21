@@ -275,9 +275,6 @@ the configuration driven by environment variables defined in `.env` files.
 └── 📄 uv.lock                  # UV dependency lock file
 ```
 
-Here’s the description you can add to your **README.md** file regarding the **Health Router** in your FastAPI
-application:
-
 ---
 
 ### **Health Check Endpoint**
