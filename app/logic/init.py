@@ -20,6 +20,8 @@ from logic.commands.messages import (
     CreateChatCommandHandler,
     CreateMessageCommand,
     CreateMessageCommandHandler,
+    GetChatMessagesCommand,
+    GetChatMessagesCommandHandler,
 )
 from logic.mediator import Mediator
 from settings.config import Config
@@ -61,7 +63,7 @@ def _init_container() -> Container:
         return MongoDBMessagesRepository(
             mongo_db_client=client,
             mongo_db_db_name=config.mongodb_chat_database,
-            mongo_db_collection_name=config.mongodb_chat_collection,
+            mongo_db_collection_name=config.mongodb_message_collection,
         )
 
     container.register(
@@ -76,6 +78,7 @@ def _init_container() -> Container:
     )
     container.register(CreateChatCommandHandler)
     container.register(CreateMessageCommandHandler)
+    container.register(GetChatMessagesCommandHandler)
 
     def init_mediator() -> Mediator:
         mediator = Mediator()
@@ -86,6 +89,10 @@ def _init_container() -> Container:
         mediator.register_command(
             CreateMessageCommand,
             [container.resolve(CreateMessageCommandHandler)],
+        )
+        mediator.register_command(
+            GetChatMessagesCommand,
+            [container.resolve(GetChatMessagesCommandHandler)],
         )
         return mediator
 

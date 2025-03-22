@@ -18,6 +18,7 @@ from infra.repositories.base import (
 from infra.repositories.convertors import (
     convert_chat_document_to_entity,
     convert_chat_entity_to_document,
+    convert_message_document_to_entity,
     convert_message_entity_to_document,
 )
 
@@ -54,12 +55,15 @@ class MongoDBChatsRepository(BaseChatsRepository, BaseMongoDBRepository):
 
 @dataclass
 class MongoDBMessagesRepository(BaseMessagesRepository, BaseMongoDBRepository):
-    async def add_message(self, chat_oid: str, message: Message) -> None:
-        await self._collection.update_one(
-            filter={"oid": chat_oid},
-            update={
-                "$push": {
-                    "messages": convert_message_entity_to_document(message=message),
-                },
-            },
+    async def get_messages_by_chat_oid(self, chat_oid: str) -> set[Message]:
+        cursor = self._collection.find({"chat_oid": chat_oid})
+
+        return {
+            convert_message_document_to_entity(document=document)
+            async for document in cursor
+        }
+
+    async def add_message(self, message: Message) -> None:
+        await self._collection.insert_one(
+            document=convert_message_entity_to_document(message=message)
         )

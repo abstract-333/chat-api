@@ -45,9 +45,12 @@ class MemoryChatRepository(BaseChatsRepository, BaseMemoryRepository):
 
 @dataclass
 class MemoryMessageRepository(BaseMessagesRepository, BaseMemoryRepository):
+    async def get_messages_by_chat_oid(self, chat_oid: str) -> set[Message]:
+        pass
+
     # TODO
-    async def add_message(self, chat_oid: str, message: Message) -> None:
+    async def add_message(self, message: Message) -> None:
         for iteration_chats in range(len(self._saved_chats)):
-            if self._saved_chats[iteration_chats].oid == chat_oid:
+            if self._saved_chats[iteration_chats].oid == message.chat_oid:
                 self._saved_chats[iteration_chats].add_message(message)
                 break

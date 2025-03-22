@@ -9,6 +9,7 @@ from punq import Container
 
 from application.api.v1.exceptions.schemas import ErrorSchema
 from application.api.v1.messages.schemas import (
+    ChatDetailSchema,
     CreateChatInSchema,
     CreateChatOutSchema,
     CreateMessageResponseSchema,
@@ -18,6 +19,7 @@ from domain.exceptions.base import ApplicationException
 from logic.commands.messages import (
     CreateChatCommand,
     CreateMessageCommand,
+    GetChatMessagesCommand,
 )
 from logic.exceptions.messages import (
     ChatNotFoundException,
@@ -50,7 +52,11 @@ router = APIRouter(tags=["Chat"], prefix="/chat")
                 "application/json": {
                     "example": {
                         "detail": {
-                            "error": 'Chat with this title "string" already exists'
+                            "error": [
+                                'Chat with this title "string" already exists',
+                                "Length of text is too long",
+                                "Text can't be empty",
+                            ],
                         },
                     },
                 },
@@ -84,7 +90,7 @@ async def create_chat_handler(
 
 
 @router.post(
-    path="/{chat_oid}/message",
+    path="/message",
     status_code=status.HTTP_201_CREATED,
     description="Add new message to chat, if chat not exists, it will raise 404 status code",
     responses={
@@ -105,7 +111,11 @@ async def create_chat_handler(
                 "application/json": {
                     "example": {
                         "detail": {
-                            "error": f"Chat with this oid {get_uuid4()} not found",
+                            "error": [
+                                f"Chat with this oid {get_uuid4()} not found",
+                                "Length of text is too long",
+                                "Text can't be empty",
+                            ],
                         },
                     },
                 },
@@ -114,7 +124,6 @@ async def create_chat_handler(
     },
 )
 async def create_message_handler(
-    chat_oid: str,
     schema: CreateMessageSchema,
     container: Container = Depends(init_container),
 ) -> CreateMessageResponseSchema:
@@ -122,7 +131,7 @@ async def create_message_handler(
     mediator: Mediator = container.resolve(Mediator)
     try:
         message, *_ = await mediator.handle_command(
-            CreateMessageCommand(text=schema.text, chat_oid=chat_oid),
+            CreateMessageCommand(text=schema.text, chat_oid=schema.chat_oid),
         )
     except ChatNotFoundException as exception:
         raise HTTPException(
@@ -135,3 +144,59 @@ async def create_message_handler(
             detail={"error": exception.message},
         ) from exception
     return CreateMessageResponseSchema.from_entity(message=message)
+
+
+@router.get(
+    "/{chat_oid}/messages",
+    status_code=status.HTTP_200_OK,
+    description="Get information about chat, and all messages in it",
+    responses={
+        status.HTTP_200_OK: {
+            "model": ChatDetailSchema,
+            "content": {
+                "application/json": {
+                    "example": {"id": get_uuid4(), "text": "Message Example"},
+                },
+            },
+        },
+        status.HTTP_400_BAD_REQUEST: {
+            "model": ErrorSchema,
+        },
+        status.HTTP_404_NOT_FOUND: {
+            "model": ErrorSchema,
+            "content": {
+                "application/json": {
+                    "example": {
+                        "detail": {
+                            "error": f"Chat with this oid {get_uuid4()} not found",
+                        },
+                    },
+                },
+            },
+        },
+    },
+)
+async def get_chat_with_messages_handler(
+    chat_oid: str,
+    container: Container = Depends(init_container),
+) -> ChatDetailSchema:
+    """Get Chat with messages"""
+    mediator: Mediator = container.resolve(Mediator)
+    try:
+        chat, *_ = await mediator.handle_command(
+            GetChatMessagesCommand(chat_oid=chat_oid)
+        )
+
+    except ChatNotFoundException as exception:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"error": exception.message},
+        ) from exception
+
+    except ApplicationException as exception:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"error": exception.message},
+        ) from exception
+
+    return ChatDetailSchema.from_entity(chat)

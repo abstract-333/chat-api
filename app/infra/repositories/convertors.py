@@ -14,6 +14,7 @@ from domain.values.messages import (
 class MessageDocument(TypedDict):
     oid: str
     text: str
+    chat_oid: str
     created_at: datetime.datetime
 
 
@@ -21,7 +22,6 @@ class ChatDocument(TypedDict):
     oid: str
     title: str
     created_at: datetime.datetime
-    messages: list[MessageDocument]
 
 
 def convert_message_entity_to_document(
@@ -30,6 +30,7 @@ def convert_message_entity_to_document(
     return {
         "oid": message.oid,
         "created_at": message.created_at,
+        "chat_oid": message.chat_oid,
         "text": message.text.as_generic_type(),
     }
 
@@ -40,6 +41,7 @@ def convert_message_document_to_entity(
     return Message(
         oid=document["oid"],
         text=Text(document["text"]),
+        chat_oid=document["chat_oid"],
         created_at=document["created_at"],
     )
 
@@ -49,9 +51,6 @@ def convert_chat_entity_to_document(chat: Chat) -> ChatDocument:
         "oid": chat.oid,
         "title": chat.title.as_generic_type(),
         "created_at": chat.created_at,
-        "messages": [
-            convert_message_entity_to_document(message) for message in chat.messages
-        ],
     }
 
 
@@ -60,8 +59,4 @@ def convert_chat_document_to_entity(document: ChatDocument) -> Chat:
         oid=document["oid"],
         title=Title(document["title"]),
         created_at=document["created_at"],
-        messages={
-            convert_message_document_to_entity(message)
-            for message in document["messages"]
-        },
     )

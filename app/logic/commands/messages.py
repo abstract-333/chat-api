@@ -60,7 +60,29 @@ class CreateMessageCommandHandler(CommandHandler[CreateMessageCommand, Message])
             raise ChatNotFoundException(oid=chat_oid)
 
         text: Text = Text(command.text)
-        message: Message = Message(text=text)
+        message: Message = Message(text=text, chat_oid=chat_oid)
         chat.add_message(message)
-        await self.messages_repository.add_message(message=message, chat_oid=chat_oid)
+        await self.messages_repository.add_message(message=message)
         return message
+
+
+@dataclass(frozen=True)
+class GetChatMessagesCommand(BaseCommand):
+    chat_oid: str
+
+
+@dataclass(frozen=True)
+class GetChatMessagesCommandHandler(CommandHandler[GetChatMessagesCommand, Chat]):
+    chats_repository: BaseChatsRepository
+    messages_repository: BaseMessagesRepository
+
+    async def handle(self, command: GetChatMessagesCommand) -> Chat:
+        chat_oid: str = command.chat_oid
+        chat: Chat | None = await self.chats_repository.get_chat_by_oid(oid=chat_oid)
+        if not chat:
+            raise ChatNotFoundException(oid=chat_oid)
+        messages: set[
+            Message
+        ] = await self.messages_repository.get_messages_by_chat_oid(chat_oid=chat_oid)
+        chat.messages = messages
+        return chat
