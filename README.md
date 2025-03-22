@@ -115,7 +115,7 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   make server
   ```
   Starts the Nginx server, which serves as a reverse proxy.
--
+
 
 - **Start Storages**:
   ```bash
@@ -193,6 +193,7 @@ The `Makefile` provides a set of commands to manage and run various parts of the
   ```
   Stops all running services.
 
+
 - **View Application Logs**:
   ```bash
   make app-logs
@@ -267,7 +268,7 @@ the configuration driven by environment variables defined in `.env` files.
 │   ├── 📂 logic
 │   ├── 📂 settings
 │   ├── 📂 tests
-│   ├── 📂 utils
+│   └── 📂 utils
 ├── 📂 config
 │   └── 📄 loki-config.yaml     # Configuration for Loki logger
 │   └── 📄 nginx.yaml           # Configuration for Nginx logger
