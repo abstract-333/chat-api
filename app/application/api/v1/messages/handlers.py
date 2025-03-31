@@ -30,31 +30,31 @@ from logic.mediator import Mediator
 from utils.uuid_4 import get_uuid4
 
 
-router = APIRouter(tags=["Chat"], prefix="/chat")
+router = APIRouter(tags=['Chat'], prefix='/chat')
 
 
 @router.post(
-    path="",
+    path='',
     status_code=status.HTTP_201_CREATED,
-    description="Create new chat, if chat with current name exists, it will raise 400 status code",
+    description='Create new chat, if chat with current name exists, it will raise 400 status code',
     responses={
         status.HTTP_201_CREATED: {
-            "model": CreateChatOutSchema,
-            "content": {
-                "application/json": {
-                    "example": {"oid": get_uuid4(), "title": "Title Example"},
+            'model': CreateChatOutSchema,
+            'content': {
+                'application/json': {
+                    'example': {'oid': get_uuid4(), 'title': 'Title Example'},
                 },
             },
         },
         status.HTTP_400_BAD_REQUEST: {
-            "model": ErrorSchema,
-            "content": {
-                "application/json": {
-                    "example": {
-                        "detail": {
-                            "error": [
+            'model': ErrorSchema,
+            'content': {
+                'application/json': {
+                    'example': {
+                        'detail': {
+                            'error': [
                                 'Chat with this title "string" already exists',
-                                "Length of text is too long",
+                                'Length of text is too long',
                                 "Text can't be empty",
                             ],
                         },
@@ -77,43 +77,43 @@ async def create_chat_handler(
     except ChatWithThatTitleAlreadyExistsException as exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail={"error": exception.message},
+            detail={'error': exception.message},
         ) from exception
 
     except ApplicationException as exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail={"error": exception.message},
+            detail={'error': exception.message},
         ) from exception
 
     return CreateChatOutSchema.from_entity(chat=chat)
 
 
 @router.post(
-    path="/message",
+    path='/message',
     status_code=status.HTTP_201_CREATED,
-    description="Add new message to chat, if chat not exists, it will raise 404 status code",
+    description='Add new message to chat, if chat not exists, it will raise 404 status code',
     responses={
         status.HTTP_201_CREATED: {
-            "model": CreateMessageSchema,
-            "content": {
-                "application/json": {
-                    "example": {"oid": get_uuid4(), "title": "Message Example"},
+            'model': CreateMessageSchema,
+            'content': {
+                'application/json': {
+                    'example': {'oid': get_uuid4(), 'title': 'Message Example'},
                 },
             },
         },
         status.HTTP_400_BAD_REQUEST: {
-            "model": ErrorSchema,
+            'model': ErrorSchema,
         },
         status.HTTP_404_NOT_FOUND: {
-            "model": ErrorSchema,
-            "content": {
-                "application/json": {
-                    "example": {
-                        "detail": {
-                            "error": [
-                                f"Chat with this oid {get_uuid4()} not found",
-                                "Length of text is too long",
+            'model': ErrorSchema,
+            'content': {
+                'application/json': {
+                    'example': {
+                        'detail': {
+                            'error': [
+                                f'Chat with this oid {get_uuid4()} not found',
+                                'Length of text is too long',
                                 "Text can't be empty",
                             ],
                         },
@@ -136,39 +136,39 @@ async def create_message_handler(
     except ChatNotFoundException as exception:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail={"error": exception.message},
+            detail={'error': exception.message},
         ) from exception
     except ApplicationException as exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail={"error": exception.message},
+            detail={'error': exception.message},
         ) from exception
     return CreateMessageResponseSchema.from_entity(message=message)
 
 
 @router.get(
-    "/{chat_oid}/messages",
+    '/{chat_oid}/messages',
     status_code=status.HTTP_200_OK,
-    description="Get information about chat, and all messages in it",
+    description='Get information about chat, and all messages in it',
     responses={
         status.HTTP_200_OK: {
-            "model": ChatDetailSchema,
-            "content": {
-                "application/json": {
-                    "example": {"id": get_uuid4(), "text": "Message Example"},
+            'model': ChatDetailSchema,
+            'content': {
+                'application/json': {
+                    'example': {'id': get_uuid4(), 'text': 'Message Example'},
                 },
             },
         },
         status.HTTP_400_BAD_REQUEST: {
-            "model": ErrorSchema,
+            'model': ErrorSchema,
         },
         status.HTTP_404_NOT_FOUND: {
-            "model": ErrorSchema,
-            "content": {
-                "application/json": {
-                    "example": {
-                        "detail": {
-                            "error": f"Chat with this oid {get_uuid4()} not found",
+            'model': ErrorSchema,
+            'content': {
+                'application/json': {
+                    'example': {
+                        'detail': {
+                            'error': f'Chat with this oid {get_uuid4()} not found',
                         },
                     },
                 },
@@ -190,13 +190,13 @@ async def get_chat_with_messages_handler(
     except ChatNotFoundException as exception:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail={"error": exception.message},
+            detail={'error': exception.message},
         ) from exception
 
     except ApplicationException as exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail={"error": exception.message},
+            detail={'error': exception.message},
         ) from exception
 
     return ChatDetailSchema.from_entity(chat)

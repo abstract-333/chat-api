@@ -9,7 +9,7 @@ from settings.config import Config
 
 def create_app() -> FastAPI:
     fastapi_app = FastAPI(
-        title="Chat API",
+        title='Chat API',
         debug=init_container().resolve(Config).debug,
         docs_url=None,
         redoc_url=None,
@@ -17,7 +17,7 @@ def create_app() -> FastAPI:
 
     register_static_docs_routes(app=fastapi_app)
 
-    fastapi_app.include_router(prefix="/v1", router=message_router_v1)
-    fastapi_app.include_router(prefix="/v1", router=health_router_v1)
+    fastapi_app.include_router(prefix='/v1', router=message_router_v1)
+    fastapi_app.include_router(prefix='/v1', router=health_router_v1)
 
     return fastapi_app

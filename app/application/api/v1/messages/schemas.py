@@ -18,7 +18,7 @@ class CreateChatOutSchema(BaseModel):
     title: str
 
     @classmethod
-    def from_entity(cls, chat: Chat) -> "CreateChatOutSchema":
+    def from_entity(cls, chat: Chat) -> 'CreateChatOutSchema':
         return cls(
             oid=chat.oid,
             title=chat.title.as_generic_type(),
@@ -35,7 +35,7 @@ class CreateMessageResponseSchema(BaseModel):
     text: str
 
     @classmethod
-    def from_entity(cls, message: Message) -> "CreateMessageResponseSchema":
+    def from_entity(cls, message: Message) -> 'CreateMessageResponseSchema':
         return cls(
             oid=message.oid,
             text=message.text.as_generic_type(),
@@ -48,7 +48,7 @@ class MessageDetailSchema(BaseModel):
     created_at: datetime
 
     @classmethod
-    def from_entity(cls, message: Message) -> "MessageDetailSchema":
+    def from_entity(cls, message: Message) -> 'MessageDetailSchema':
         return cls(
             oid=message.oid,
             text=message.text.as_generic_type(),
@@ -63,7 +63,7 @@ class ChatDetailSchema(BaseModel):
     messages: Iterable[MessageDetailSchema]
 
     @classmethod
-    def from_entity(cls, chat: Chat) -> "ChatDetailSchema":
+    def from_entity(cls, chat: Chat) -> 'ChatDetailSchema':
         return cls(
             oid=chat.oid,
             title=chat.title.as_generic_type(),

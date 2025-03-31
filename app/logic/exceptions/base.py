@@ -7,4 +7,4 @@ from domain.exceptions.base import ApplicationException
 class LogicException(ApplicationException):
     @property
     def message(self) -> str:
-        return "When handling request exception occurred"
+        return 'When handling request exception occurred'

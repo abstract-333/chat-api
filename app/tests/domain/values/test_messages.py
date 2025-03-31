@@ -22,11 +22,11 @@ from utils.uuid_4 import get_uuid4
 
 
 @pytest.mark.parametrize(
-    argnames="text, chat_oid, expectation",
+    argnames='text, chat_oid, expectation',
     argvalues=[
-        ("Hello World", get_uuid4(), does_not_raise()),
-        ("Hello World" * 100, get_uuid4(), does_not_raise()),
-        ("", get_uuid4(), pytest.raises(expected_exception=EmptyTextError)),
+        ('Hello World', get_uuid4(), does_not_raise()),
+        ('Hello World' * 100, get_uuid4(), does_not_raise()),
+        ('', get_uuid4(), pytest.raises(expected_exception=EmptyTextError)),
     ],
 )
 def test_create_message(
@@ -47,11 +47,11 @@ def test_create_message(
 
 
 @pytest.mark.parametrize(
-    argnames="chat_title ,expectation",
+    argnames='chat_title ,expectation',
     argvalues=[
-        ("Hello World Chat", does_not_raise()),
-        ("", pytest.raises(expected_exception=EmptyTextError)),
-        ("t" * 300, pytest.raises(expected_exception=TextTooLongException)),
+        ('Hello World Chat', does_not_raise()),
+        ('', pytest.raises(expected_exception=EmptyTextError)),
+        ('t' * 300, pytest.raises(expected_exception=TextTooLongException)),
     ],
 )
 def test_create_chat(

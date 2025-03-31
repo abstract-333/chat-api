@@ -39,13 +39,13 @@ class BaseMongoDBRepository(ABC):
 @dataclass
 class MongoDBChatsRepository(BaseChatsRepository, BaseMongoDBRepository):
     async def get_chat_by_oid(self, oid: str) -> Chat | None:
-        chat_document = await self._collection.find_one(filter={"oid": oid})
+        chat_document = await self._collection.find_one(filter={'oid': oid})
         if not chat_document:
             return None
         return convert_chat_document_to_entity(document=chat_document)
 
     async def check_chat_exists_by_title(self, title: str) -> bool:
-        return bool(await self._collection.find_one(filter={"title": title}))
+        return bool(await self._collection.find_one(filter={'title': title}))
 
     async def add_chat(self, chat: Chat) -> None:
         collection = self._collection
@@ -56,7 +56,7 @@ class MongoDBChatsRepository(BaseChatsRepository, BaseMongoDBRepository):
 @dataclass
 class MongoDBMessagesRepository(BaseMessagesRepository, BaseMongoDBRepository):
     async def get_messages_by_chat_oid(self, chat_oid: str) -> set[Message]:
-        cursor = self._collection.find({"chat_oid": chat_oid})
+        cursor = self._collection.find({'chat_oid': chat_oid})
 
         return {
             convert_message_document_to_entity(document=document)

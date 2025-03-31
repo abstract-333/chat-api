@@ -9,7 +9,7 @@ from logic.mediator import Mediator
 from tests.fixtures import init_dummy_container
 
 
-@fixture(scope="function")
+@fixture(scope='function')
 def container() -> Container:
     return init_dummy_container()
 

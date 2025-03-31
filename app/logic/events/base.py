@@ -12,8 +12,8 @@ from typing import (
 from events.base import BaseEvent
 
 
-ET = TypeVar("ET", bound=BaseEvent)
-ER = TypeVar("ER", bound=Any)
+ET = TypeVar('ET', bound=BaseEvent)
+ER = TypeVar('ER', bound=Any)
 
 
 @dataclass

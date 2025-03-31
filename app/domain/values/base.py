@@ -10,7 +10,7 @@ from typing import (
 )
 
 
-VT = TypeVar("VT", bound=Any)
+VT = TypeVar('VT', bound=Any)
 
 
 @dataclass(frozen=True)

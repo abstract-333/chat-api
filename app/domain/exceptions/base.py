@@ -5,4 +5,4 @@ from dataclasses import dataclass
 class ApplicationException(Exception):
     @property
     def message(self) -> str:
-        return "Application error occurred"
+        return 'Application error occurred'

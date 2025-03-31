@@ -9,7 +9,7 @@ class TextTooLongException(ApplicationException):
 
     @property
     def message(self) -> str:
-        return f"Length of text is too long {self.text[:255]}..."
+        return f'Length of text is too long {self.text[:255]}...'
 
 
 @dataclass(eq=False)

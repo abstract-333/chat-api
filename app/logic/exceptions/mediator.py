@@ -9,7 +9,7 @@ class EventHandlersNotRegisteredException(LogicException):
 
     @property
     def message(self) -> str:
-        return f"Handler not found: {self.event_type}"
+        return f'Handler not found: {self.event_type}'
 
 
 @dataclass(eq=False)
@@ -18,4 +18,4 @@ class CommandHandlersNotRegisteredException(LogicException):
 
     @property
     def message(self) -> str:
-        return f"Command not found: {self.command_type}"
+        return f'Command not found: {self.command_type}'

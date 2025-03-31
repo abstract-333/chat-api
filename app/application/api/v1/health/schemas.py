@@ -8,5 +8,5 @@ class HealthDetail(BaseModel):
 
 
 class HealthOut(BaseModel):
-    status: Literal["Ok", "MongoDB is down"]
+    status: Literal['Ok', 'MongoDB is down']
     detail: HealthDetail

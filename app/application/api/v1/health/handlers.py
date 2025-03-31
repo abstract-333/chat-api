@@ -9,13 +9,13 @@ from logic.init import init_container
 
 
 router = APIRouter(
-    tags=["Health"],
+    tags=['Health'],
 )
 
 
 @router.get(
-    "/health",
-    tags=["Health"],
+    '/health',
+    tags=['Health'],
     response_model=HealthOut,
 )
 async def health_check(
@@ -24,15 +24,15 @@ async def health_check(
     """Performs a system-wide health check, including MongoDB and system stats."""
     try:
         await container.resolve(BaseMessagesRepository).mongo_db_client.admin.command(
-            "ping"
+            'ping'
         )  # MongoDB health check
-        mongo_status = "ok"
+        mongo_status = 'ok'
     except Exception as e:
-        mongo_status = f"error: {str(e)}"
+        mongo_status = f'error: {str(e)}'
 
     return {
-        "status": "healthy" if mongo_status == "Ok" else "MongoDB is down",
-        "detail": {
-            "mongodb": mongo_status,
+        'status': 'healthy' if mongo_status == 'Ok' else 'MongoDB is down',
+        'detail': {
+            'mongodb': mongo_status,
         },
     }
